@@ -1,0 +1,27 @@
+experiment:
+  id: test_e034_spoter_pose54_controlled_u30
+  operation: test_evaluate
+  mode: full
+  seed: 43
+data:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform30-a65d7d605573ea13
+  num_classes: 400
+feature:
+  view: spoter54
+model:
+  name: spoter_pose54_controlled
+  input_channels: 2
+  dropout: 0.1
+  max_frames: 30
+checkpoint:
+  source_experiment: e034_spoter_pose54_controlled_u30
+  local_path: artifacts/runs/e034_spoter_pose54_controlled_u30_s43/best.pt
+evaluation:
+  split: test
+  batch_size: 32
+  predictions: true
+  export_scores: true
+output:
+  root: artifacts/test_evaluate

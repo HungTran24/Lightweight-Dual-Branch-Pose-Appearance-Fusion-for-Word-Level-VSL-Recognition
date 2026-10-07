@@ -1,0 +1,53 @@
+experiment:
+  id: e026_rgb_union_smoke
+  operation: e026_rgb_features
+  mode: smoke
+  description: E026 one-pass U24 and U30 RGB feature extraction smoke test on clean part 1.
+
+e021_source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 7edced63aedc81908624119314dba5dc7c486ce7
+  prefix: e021_yolo_pose59_bbox_handrgb_full
+  identity: db7ffa2f0b434e05d024c11733663cd55389c191de9dabca3994abcc02abcc3f
+  parts: [1]
+
+u24_source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform24-fbbaf7a173a950b2
+
+u30_source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform30-a65d7d605573ea13
+
+manifests:
+  train: manifests/audit/train_clean.csv
+  val: manifests/audit/val_clean.csv
+
+expected_videos:
+  train: 19714
+  val: 2529
+
+excluded_video_ids: ["019442"]
+
+preprocessing:
+  backbone: mobilenet_v3_small
+  weights: IMAGENET1K_V1
+  feature_dim: 576
+  target_size: 128
+  interpolation: bilinear
+  antialias: true
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  output_dtype: float16
+
+data:
+  batch_size: 256
+
+smoke:
+  train_videos: 10
+  val_videos: 5
+
+output:
+  root: artifacts/rgb/e026_rgb_union_smoke

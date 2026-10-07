@@ -1,0 +1,34 @@
+experiment:
+  id: benchmark_slr_controlled_a100_available_checkpoints
+  operation: classifier_benchmark
+  mode: full
+hardware:
+  gpu_contains: A100
+protocol:
+  precision: float32
+  inputs_on_gpu: true
+  warmup_iterations: 50
+  batch1_iterations: 200
+  batch32_iterations: 100
+entries:
+  - name: spoter_pose54_controlled_u30_seed42
+    frames: 30
+    nodes: 54
+    checkpoint: artifacts/runs/e034_spoter_pose54_controlled_u30_s42/best.pt
+    model:
+      name: spoter_pose54_controlled
+      input_channels: 2
+      dropout: 0.1
+      max_frames: 30
+  - name: slgcn_bone_pose27_controlled_u30_epoch10
+    frames: 30
+    nodes: 27
+    checkpoint: artifacts/checkpoints/e035_slgcn_bone_pose27_controlled_u30_s42_epoch10_best.pt
+    model:
+      name: slgcn_bone_controlled
+      input_channels: 2
+      groups: 16
+      block_size: 41
+      keep_rate: 0.9
+output:
+  root: artifacts/benchmarks/slr_controlled_a100_available_checkpoints

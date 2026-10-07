@@ -1,0 +1,44 @@
+{
+  "source_experiment": "e008_tcn_pose53_uniform30",
+  "seed": 42,
+  "checkpoint_epoch": 55,
+  "feature_view": "pose53",
+  "sequence_length": 30,
+  "data_revision": "5a0042e1daec2813f74f08fa955276c777e2b40a",
+  "validation": {
+    "samples": 2529,
+    "top1_correct": 2106,
+    "top1": 0.8327401876449585,
+    "top5_correct": 2419,
+    "top5": 0.9565045237541199,
+    "top1_errors": 423,
+    "error_gt_in_top5": 313,
+    "error_gt_in_top5_rate": 0.7399527186761229
+  },
+  "per_signer": {
+    "006": {"samples": 833, "errors": 75, "top1": 0.9099639855942377},
+    "020": {"samples": 996, "errors": 123, "top1": 0.8765060240963856},
+    "028": {"samples": 700, "errors": 225, "top1": 0.6785714285714286},
+    "without_028": {"samples": 1829, "errors": 198, "top1": 0.8917441224712958}
+  },
+  "three_seed_tcn": {
+    "full_top1_mean": 0.8330,
+    "full_top1_sample_sd": 0.0083,
+    "without_028_top1_mean": 0.8923,
+    "without_028_top1_sample_sd": 0.0085,
+    "signer_028_top1_mean": 0.6781,
+    "signer_028_top1_sample_sd": 0.0079
+  },
+  "matched_rtmw_diagnostic": {
+    "scope": "Uniform-24 seed 42 diagnostic, not a fully matched three-seed causal experiment",
+    "tcn": {"yolo_signer_028_top1": 0.6714, "rtmw_signer_028_top1": 0.7829},
+    "stgcn": {"yolo_signer_028_top1": 0.7057, "rtmw_signer_028_top1": 0.81}
+  },
+  "qualitative_videos": {
+    "local_directory": "artifacts/error_analysis/confusion_pair_raw_videos/labeled_pairs/",
+    "pair_videos": 5,
+    "source_videos": 10,
+    "tracked_by_git": false,
+    "annotation_status": "GT, prediction, signer and video ID labels only; no expert linguistic annotation"
+  }
+}

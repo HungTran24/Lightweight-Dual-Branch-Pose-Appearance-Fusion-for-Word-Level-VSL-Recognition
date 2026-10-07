@@ -1,0 +1,42 @@
+experiment:
+  id: e038_rgb_frame_features_u30
+  operation: e038_rgb_frame_features
+  mode: full
+  description: E038 per-frame MobileNet U30 hand embeddings.
+e021_source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 7edced63aedc81908624119314dba5dc7c486ce7
+  prefix: e021_yolo_pose59_bbox_handrgb_full
+  identity: db7ffa2f0b434e05d024c11733663cd55389c191de9dabca3994abcc02abcc3f
+  parts: [1, 2, 3, 4, 5, 6, 7]
+u30_source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform30-a65d7d605573ea13
+manifests:
+  train: manifests/audit/train_clean.csv
+  val: manifests/audit/val_clean.csv
+expected_videos:
+  train: 19714
+  val: 2529
+excluded_video_ids: ["019442"]
+preprocessing:
+  backbone: mobilenet_v3_small
+  weights: IMAGENET1K_V1
+  feature_dim: 576
+  target_size: 128
+  interpolation: bilinear
+  antialias: true
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  output_dtype: float16
+data:
+  batch_size: 256
+output:
+  root: artifacts/rgb/e038_rgb_frame_u30_full
+integrations:
+  hf_artifacts:
+    enabled: true
+    repo_id: hungchill24/vsl400-kp-selection-models
+    repo_type: model
+    prefix: e038_rgb_frame_u30_full

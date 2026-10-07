@@ -1,0 +1,19 @@
+experiment:
+  id: e027_weighted_log_prob_fusion
+  operation: e027_log_fusion
+  mode: full
+inputs:
+  - seed: 42
+    rgb_scores: artifacts/runs/e026_rgb_linear_u30_s42/scores.npz
+    pose_scores: artifacts/runs/e026_fusion_u30_s42/pose_scores.npz
+  - seed: 43
+    rgb_scores: artifacts/runs/e026_rgb_linear_u30_s43/scores.npz
+    pose_scores: artifacts/runs/e026_fusion_u30_s43/pose_scores.npz
+  - seed: 44
+    rgb_scores: artifacts/runs/e026_rgb_linear_u30_s44/scores.npz
+    pose_scores: artifacts/runs/e026_fusion_u30_s44/pose_scores.npz
+fusion:
+  epsilon: 1.0e-12
+  beta_grid: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+output:
+  root: reports/experiments/e027_weighted_log_prob_fusion

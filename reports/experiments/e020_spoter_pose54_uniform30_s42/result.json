@@ -1,0 +1,41 @@
+{
+  "experiment_id": "e020_spoter_pose54_uniform30",
+  "scope": "single-seed validation gate",
+  "status": "ok",
+  "seed": 42,
+  "model": "spoter",
+  "feature_view": "spoter54",
+  "sequence_length": 30,
+  "input_channels": 2,
+  "data": {
+    "repo_id": "hungchill24/vsl400-kp-selection-features",
+    "revision": "5a0042e1daec2813f74f08fa955276c777e2b40a",
+    "artifact_path": "yolo-e005-pose59-uniform30-a65d7d605573ea13",
+    "validation_samples": 2529
+  },
+  "train": {
+    "batch_size": 32,
+    "max_epochs": 100,
+    "min_epochs": 60,
+    "patience": 15,
+    "epochs_trained": 97,
+    "optimizer": "adamw",
+    "learning_rate": 0.0001
+  },
+  "best": {
+    "epoch": 82,
+    "validation_top1": 0.5875840187072754,
+    "validation_top5": 0.8529062867164612,
+    "validation_macro_f1": 0.581304669380188,
+    "validation_loss": 1.6615362639670412
+  },
+  "environment": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "precision": "float32"
+  },
+  "tracking": {
+    "hf_repo": "hungchill24/vsl400-kp-selection-models",
+    "hf_path": "runs/e020_spoter_pose54_uniform30_s42/"
+  },
+  "interpretation": "This validates the SPOTER-style architecture under the project YOLO, Uniform-30, and (x,y) preprocessing protocol. It is not a reproduction of the official SPOTER detector, normalization, augmentation, variable-length input, or 350-epoch SGD recipe. Seeds 43 and 44 were not run because seed 42 was not competitive with the TCN and ST-GCN Pose53 baselines."
+}

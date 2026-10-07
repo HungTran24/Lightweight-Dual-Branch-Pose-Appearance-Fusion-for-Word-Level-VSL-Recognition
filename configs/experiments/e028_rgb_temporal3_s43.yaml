@@ -1,0 +1,35 @@
+experiment:
+  id: e028_rgb_temporal3_s43
+  operation: e028_rgb_train
+  mode: full
+  seed: 43
+manifests:
+  train: manifests/audit/train_clean.csv
+  val: manifests/audit/val_clean.csv
+expected_videos:
+  train: 19714
+  val: 2529
+excluded_video_ids: ["019442"]
+rgb_data:
+  root: artifacts/rgb/e028_rgb_temporal3_full/data
+  receipt: artifacts/rgb/e028_rgb_temporal3_full/receipt.json
+  receipt_sha256: 0ccade47118c75b49c19d209c75d19be3acd429e90afe997f3adc79222195a3a
+  extraction_identity: 9c5d05a21ade20db15ee466bbbcfb9a87bf4ac382fa387b7e8dc2759318f3c62
+model:
+  name: rgb_temporal3
+train:
+  epochs: 100
+  min_epochs: 60
+  patience: 15
+  batch_size: 256
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+output:
+  root: artifacts/runs/e028_rgb_temporal3_s43
+integrations:
+  wandb:
+    enabled: false
+  hf_checkpoints:
+    enabled: false

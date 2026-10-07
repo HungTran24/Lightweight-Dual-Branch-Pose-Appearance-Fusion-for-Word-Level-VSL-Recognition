@@ -1,0 +1,56 @@
+experiment:
+  id: e005_yolo_pose59_extract
+  operation: extract
+  mode: full
+  seed: 42
+  description: All-frame Pose59 extraction from the pinned E005 best checkpoint.
+
+checkpoint:
+  repo_id: hungchill24/vsl400-kp-selection-models
+  revision: 8f3c52134d8499741d5394e240d05e127f7a2d84
+  path: runs/e005_yolo_person17_hand21_discriminative_max30_s42/best.pt
+
+data:
+  dataset_repo: hungchill24/vsl400-front-view
+  dataset_revision: df5509963c62b2adaa18525d2990c8b30a100829
+  parts: [1, 2, 3, 4, 5, 6, 7]
+  known_decode_defects:
+    - video_id: "019442"
+      reason: "corrupt mp4 container (moov atom not found)"
+  manifests:
+    train: manifests/audit/train_clean.csv
+    val: manifests/audit/val_clean.csv
+    test: manifests/vsl400_front_400gloss/test.csv
+  expected_videos:
+    train: 19714
+    val: 2529
+    test: 2508
+  expected_frames: 1587085
+  batch_size: 128
+  cleanup_part_cache: false
+  amp: true
+  require_cuda: true
+  nms_confidence: 0.25
+  nms_iou: 0.7
+  max_detections: 300
+
+model:
+  name: yolo26m-pose.pt
+  architecture: yolo26m-pose.yaml
+  ultralytics_version: 8.4.146
+  person_keypoints: 17
+  hand_keypoints: 21
+  image_size: 640
+
+output:
+  root: artifacts/yolo/e005_yolo_pose59_extract
+  run_dir: run
+
+integrations:
+  wandb:
+    enabled: false
+  hf_artifacts:
+    enabled: true
+    resume_from_hf: true
+    repo_id: hungchill24/vsl400-kp-selection-features
+    private: true

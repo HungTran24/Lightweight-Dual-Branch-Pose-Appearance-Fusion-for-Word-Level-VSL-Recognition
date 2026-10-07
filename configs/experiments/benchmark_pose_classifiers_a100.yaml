@@ -1,0 +1,60 @@
+experiment:
+  id: benchmark_pose_classifiers_a100
+  operation: classifier_benchmark
+  mode: full
+hardware:
+  gpu_contains: A100
+protocol:
+  precision: float32
+  inputs_on_gpu: true
+  warmup_iterations: 50
+  batch1_iterations: 200
+  batch32_iterations: 100
+entries:
+  - name: bilstm_u24
+    frames: 24
+    checkpoint: artifacts/runs/e022_bilstm_pose53_uniform24_s42/best.pt
+    model: &bilstm
+      name: bilstm
+      input_channels: 2
+      hidden_size: 128
+  - name: bilstm_u30
+    frames: 30
+    checkpoint: artifacts/runs/e010_bilstm_pose53_uniform30_s42/best.pt
+    model: *bilstm
+  - name: tcn_u24
+    frames: 24
+    checkpoint: artifacts/runs/e016_tcn_pose53_uniform24_s42/best.pt
+    model: &tcn
+      name: tcn
+      input_channels: 2
+      channels: [256, 256, 256]
+      dilations: [1, 2, 4]
+      kernel_size: 5
+      dropout: 0.32322641377886574
+  - name: tcn_u30
+    frames: 30
+    checkpoint: artifacts/runs/e008_tcn_pose53_uniform30_s42/best.pt
+    model: *tcn
+  - name: tcn_u60
+    frames: 60
+    checkpoint: artifacts/runs/e030_tcn_pose53_uniform60_s42_s42/best.pt
+    model: *tcn
+  - name: stgcn_u24
+    frames: 24
+    checkpoint: artifacts/runs/e018_stgcn_pose53_uniform24_s42/best.pt
+    model: &stgcn
+      name: stgcn
+      input_channels: 2
+      temporal_kernel: 9
+      dropout: 0.5
+  - name: stgcn_u30
+    frames: 30
+    checkpoint: artifacts/runs/e013_stgcn_pose53_uniform30_s42/best.pt
+    model: *stgcn
+  - name: stgcn_u60
+    frames: 60
+    checkpoint: artifacts/runs/e031_stgcn_pose53_uniform60_s42/best.pt
+    model: *stgcn
+output:
+  root: artifacts/benchmarks/pose_classifiers_u24_u30_u60_a100

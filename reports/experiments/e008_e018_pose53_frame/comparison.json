@@ -1,0 +1,307 @@
+{
+  "best_experiment_id": "e013_stgcn_pose53_uniform30",
+  "experiments": [
+    {
+      "artifact_path": "yolo-e005-pose59-uniform30-a65d7d605573ea13",
+      "experiment_id": "e008_tcn_pose53_uniform30",
+      "feature_view": "pose53",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8366596102714539,
+          "sample_sd": 0.0071123293388703265
+        },
+        "best_validation_top1": {
+          "mean": 0.8330038189888,
+          "sample_sd": 0.008306810221001635
+        },
+        "best_validation_top5": {
+          "mean": 0.9592724442481995,
+          "sample_sd": 0.0024693797064647065
+        }
+      },
+      "model": "tcn",
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8369865417480469,
+          "best_validation_top1": 0.8327401876449585,
+          "best_validation_top5": 0.9565045237541199,
+          "seed": 42,
+          "summary": "artifacts/runs/e008_tcn_pose53_uniform30_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8293894529342651,
+          "best_validation_top1": 0.8248319625854492,
+          "best_validation_top5": 0.9600632786750793,
+          "seed": 43,
+          "summary": "artifacts/runs/e008_tcn_pose53_uniform30_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8436028361320496,
+          "best_validation_top1": 0.8414393067359924,
+          "best_validation_top5": 0.9612495303153992,
+          "seed": 44,
+          "summary": "artifacts/runs/e008_tcn_pose53_uniform30_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 30
+    },
+    {
+      "artifact_path": "yolo-e005-pose59-uniform30-a65d7d605573ea13",
+      "experiment_id": "e013_stgcn_pose53_uniform30",
+      "feature_view": "pose53",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8483890096346537,
+          "sample_sd": 0.01128083545891482
+        },
+        "best_validation_top1": {
+          "mean": 0.8446026047070821,
+          "sample_sd": 0.012174617354417258
+        },
+        "best_validation_top5": {
+          "mean": 0.9642810026804606,
+          "sample_sd": 0.005383041744357979
+        }
+      },
+      "model": "stgcn",
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8463205099105835,
+          "best_validation_top1": 0.8414393067359924,
+          "best_validation_top5": 0.9600632786750793,
+          "seed": 42,
+          "summary": "artifacts/runs/e013_stgcn_pose53_uniform30_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8382855653762817,
+          "best_validation_top1": 0.8343218564987183,
+          "best_validation_top5": 0.9624357223510742,
+          "seed": 43,
+          "summary": "artifacts/runs/e013_stgcn_pose53_uniform30_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.860560953617096,
+          "best_validation_top1": 0.8580466508865356,
+          "best_validation_top5": 0.9703440070152283,
+          "seed": 44,
+          "summary": "artifacts/runs/e013_stgcn_pose53_uniform30_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 30
+    },
+    {
+      "artifact_path": "yolo-e005-pose59-uniform16-cf0e39cbdf368468",
+      "experiment_id": "e015_tcn_pose53_uniform16",
+      "feature_view": "pose53",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8263476292292277,
+          "sample_sd": 0.00222281171749767
+        },
+        "best_validation_top1": {
+          "mean": 0.8232502937316895,
+          "sample_sd": 0.0028513940765175945
+        },
+        "best_validation_top5": {
+          "mean": 0.95452747742335,
+          "sample_sd": 0.0018120032982174258
+        }
+      },
+      "model": "tcn",
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8243684768676758,
+          "best_validation_top1": 0.8208777904510498,
+          "best_validation_top5": 0.9549229145050049,
+          "seed": 42,
+          "summary": "artifacts/runs/e015_tcn_pose53_uniform16_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.825921893119812,
+          "best_validation_top1": 0.8224594593048096,
+          "best_validation_top5": 0.9525504112243652,
+          "seed": 43,
+          "summary": "artifacts/runs/e015_tcn_pose53_uniform16_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8287525177001953,
+          "best_validation_top1": 0.826413631439209,
+          "best_validation_top5": 0.9561091065406799,
+          "seed": 44,
+          "summary": "artifacts/runs/e015_tcn_pose53_uniform16_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 16
+    },
+    {
+      "artifact_path": "yolo-e005-pose59-uniform24-fbbaf7a173a950b2",
+      "experiment_id": "e016_tcn_pose53_uniform24",
+      "feature_view": "pose53",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8351369698842367,
+          "sample_sd": 0.0005846406447723387
+        },
+        "best_validation_top1": {
+          "mean": 0.8320811986923218,
+          "sample_sd": 0.0009950799188909248
+        },
+        "best_validation_top5": {
+          "mean": 0.9587452411651611,
+          "sample_sd": 0.0028052943160370896
+        }
+      },
+      "model": "tcn",
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8356907367706299,
+          "best_validation_top1": 0.8311585783958435,
+          "best_validation_top5": 0.9557137489318848,
+          "seed": 42,
+          "summary": "artifacts/runs/e016_tcn_pose53_uniform24_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.83519446849823,
+          "best_validation_top1": 0.8331356048583984,
+          "best_validation_top5": 0.9612495303153992,
+          "seed": 43,
+          "summary": "artifacts/runs/e016_tcn_pose53_uniform24_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8345257043838501,
+          "best_validation_top1": 0.8319494128227234,
+          "best_validation_top5": 0.9592724442481995,
+          "seed": 44,
+          "summary": "artifacts/runs/e016_tcn_pose53_uniform24_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 24
+    },
+    {
+      "artifact_path": "yolo-e005-pose59-uniform16-cf0e39cbdf368468",
+      "experiment_id": "e017_stgcn_pose53_uniform16",
+      "feature_view": "pose53",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8164633313814799,
+          "sample_sd": 0.007154448832651721
+        },
+        "best_validation_top1": {
+          "mean": 0.8136285742123922,
+          "sample_sd": 0.007772000519216949
+        },
+        "best_validation_top5": {
+          "mean": 0.9507051507631937,
+          "sample_sd": 0.00426485418384915
+        }
+      },
+      "model": "stgcn",
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8218943476676941,
+          "best_validation_top1": 0.817714512348175,
+          "best_validation_top5": 0.9537366628646851,
+          "seed": 42,
+          "summary": "artifacts/runs/e017_stgcn_pose53_uniform16_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8083567023277283,
+          "best_validation_top1": 0.8046658635139465,
+          "best_validation_top5": 0.945828378200531,
+          "seed": 43,
+          "summary": "artifacts/runs/e017_stgcn_pose53_uniform16_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8191389441490173,
+          "best_validation_top1": 0.8185053467750549,
+          "best_validation_top5": 0.9525504112243652,
+          "seed": 44,
+          "summary": "artifacts/runs/e017_stgcn_pose53_uniform16_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 16
+    },
+    {
+      "artifact_path": "yolo-e005-pose59-uniform24-fbbaf7a173a950b2",
+      "experiment_id": "e018_stgcn_pose53_uniform24",
+      "feature_view": "pose53",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8434627453486124,
+          "sample_sd": 0.0023569460201715606
+        },
+        "best_validation_top1": {
+          "mean": 0.8397258520126343,
+          "sample_sd": 0.003362950202017017
+        },
+        "best_validation_top5": {
+          "mean": 0.9626993536949158,
+          "sample_sd": 0.003020022839279434
+        }
+      },
+      "model": "stgcn",
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8409658670425415,
+          "best_validation_top1": 0.835903525352478,
+          "best_validation_top5": 0.9659944772720337,
+          "seed": 42,
+          "summary": "artifacts/runs/e018_stgcn_pose53_uniform24_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8456489443778992,
+          "best_validation_top1": 0.8422301411628723,
+          "best_validation_top5": 0.9600632786750793,
+          "seed": 43,
+          "summary": "artifacts/runs/e018_stgcn_pose53_uniform24_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8437734246253967,
+          "best_validation_top1": 0.8410438895225525,
+          "best_validation_top5": 0.9620403051376343,
+          "seed": 44,
+          "summary": "artifacts/runs/e018_stgcn_pose53_uniform24_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 24
+    }
+  ],
+  "protocol": {
+    "data": {
+      "num_classes": 400,
+      "repo_id": "hungchill24/vsl400-kp-selection-features",
+      "revision": "5a0042e1daec2813f74f08fa955276c777e2b40a"
+    }
+  },
+  "selection_metric": "best_validation_top1"
+}

@@ -1,0 +1,33 @@
+experiment:
+  id: e026_fusion_u30_s42
+  operation: e026_fusion
+  mode: full
+  seed: 42
+rgb_scores: artifacts/runs/e026_rgb_linear_u30_s42/scores.npz
+pose:
+  data:
+    repo_id: hungchill24/vsl400-kp-selection-features
+    revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+    artifact_path: yolo-e005-pose59-uniform30-a65d7d605573ea13
+    num_classes: 400
+  model:
+    name: tcn
+    input_channels: 2
+    channels: [256, 256, 256]
+    dilations: [1, 2, 4]
+    kernel_size: 5
+    dropout: 0.32322641377886574
+  checkpoint:
+    repo_id: hungchill24/vsl400-kp-selection-models
+    revision: 7bf539b8a4c4c9a6eb09a909d441509268f351c9
+    path: runs/e008_tcn_pose53_uniform30_s42/best.pt
+    expected_epoch: 55
+evaluation:
+  batch_size: 32
+output:
+  root: artifacts/runs/e026_fusion_u30_s42
+integrations:
+  wandb:
+    enabled: false
+  hf_checkpoints:
+    enabled: false

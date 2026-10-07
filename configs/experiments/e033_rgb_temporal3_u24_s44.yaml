@@ -1,0 +1,37 @@
+experiment:
+  id: e033_rgb_temporal3_u24_s44
+  operation: e028_rgb_train
+  mode: full
+  seed: 44
+manifests:
+  train: manifests/audit/train_clean.csv
+  val: manifests/audit/val_clean.csv
+expected_videos:
+  train: 19714
+  val: 2529
+excluded_video_ids: ["019442"]
+rgb_data:
+  root: artifacts/rgb/e033_rgb_temporal3_u24_full/data
+  receipt: artifacts/rgb/e033_rgb_temporal3_u24_full/receipt.json
+  receipt_sha256: f5f645abb39170631a8e45008d09d9008cb9fa3553ac6ba63388ffc8c73d4e79
+  extraction_identity: 5ca91e244926e67fa2e73abf8a2d414e700688bab19ec8cc4b4b9dd6605c2d07
+  sampling_slots: 24
+model:
+  name: rgb_temporal3
+train:
+  epochs: 100
+  min_epochs: 60
+  patience: 15
+  batch_size: 256
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+output:
+  root: artifacts/runs/e033_rgb_temporal3_u24_s44
+integrations:
+  wandb:
+    enabled: true
+    project: vsl400-recognition
+  hf_checkpoints:
+    enabled: false

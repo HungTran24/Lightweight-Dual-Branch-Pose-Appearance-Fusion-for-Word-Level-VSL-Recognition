@@ -1,0 +1,183 @@
+{
+  "best_experiment_id": "e006_tcn_pose59_uniform30",
+  "experiments": [
+    {
+      "artifact_path": "yolo-e005-pose59-uniform16-cf0e39cbdf368468",
+      "experiment_id": "e006_tcn_pose59_uniform16",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8148016929626465,
+          "sample_sd": 0.0040282695198220935
+        },
+        "best_validation_top1": {
+          "mean": 0.8102016647656759,
+          "sample_sd": 0.003954142332114463
+        },
+        "best_validation_top5": {
+          "mean": 0.9518913825352987,
+          "sample_sd": 0.0015980596423523332
+        }
+      },
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8189122676849365,
+          "best_validation_top1": 0.8141558170318604,
+          "best_validation_top5": 0.9501779079437256,
+          "seed": 42,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform16_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8146317005157471,
+          "best_validation_top1": 0.8102016448974609,
+          "best_validation_top5": 0.9533412456512451,
+          "seed": 43,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform16_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8108611106872559,
+          "best_validation_top1": 0.8062475323677063,
+          "best_validation_top5": 0.9521549940109253,
+          "seed": 44,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform16_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 16
+    },
+    {
+      "artifact_path": "yolo-e005-pose59-uniform24-fbbaf7a173a950b2",
+      "experiment_id": "e006_tcn_pose59_uniform24",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8231740593910217,
+          "sample_sd": 0.002935875795274851
+        },
+        "best_validation_top1": {
+          "mean": 0.8194279472033182,
+          "sample_sd": 0.003220452341111855
+        },
+        "best_validation_top5": {
+          "mean": 0.9553183118502299,
+          "sample_sd": 0.0024051947134477334
+        }
+      },
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.825777530670166,
+          "best_validation_top1": 0.8208777904510498,
+          "best_validation_top5": 0.9580861926078796,
+          "seed": 42,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform24_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.819991946220398,
+          "best_validation_top1": 0.8157374262809753,
+          "best_validation_top5": 0.9537366628646851,
+          "seed": 43,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform24_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8237527012825012,
+          "best_validation_top1": 0.8216686248779297,
+          "best_validation_top5": 0.954132080078125,
+          "seed": 44,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform24_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 24
+    },
+    {
+      "artifact_path": "yolo-e005-pose59-uniform30-a65d7d605573ea13",
+      "experiment_id": "e006_tcn_pose59_uniform30",
+      "metrics": {
+        "best_validation_macro_f1": {
+          "mean": 0.8269526362419128,
+          "sample_sd": 0.003834773299895353
+        },
+        "best_validation_top1": {
+          "mean": 0.8228548765182495,
+          "sample_sd": 0.003813209884936241
+        },
+        "best_validation_top5": {
+          "mean": 0.9575589895248413,
+          "sample_sd": 0.0017830041293164167
+        }
+      },
+      "runs": [
+        {
+          "best_validation_macro_f1": 0.8248586654663086,
+          "best_validation_top1": 0.8200870156288147,
+          "best_validation_top5": 0.9576907753944397,
+          "seed": 42,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform30_s42/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8246207237243652,
+          "best_validation_top1": 0.8212732076644897,
+          "best_validation_top5": 0.9557137489318848,
+          "seed": 43,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform30_s43/summary.json"
+        },
+        {
+          "best_validation_macro_f1": 0.8313785195350647,
+          "best_validation_top1": 0.8272044062614441,
+          "best_validation_top5": 0.9592724442481995,
+          "seed": 44,
+          "summary": "artifacts/runs/e006_tcn_pose59_uniform30_s44/summary.json"
+        }
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "sequence_length": 30
+    }
+  ],
+  "protocol": {
+    "data": {
+      "num_classes": 400,
+      "repo_id": "hungchill24/vsl400-kp-selection-features",
+      "revision": "5a0042e1daec2813f74f08fa955276c777e2b40a"
+    },
+    "feature": {
+      "view": "pose59"
+    },
+    "model": {
+      "channels": [
+        256,
+        256,
+        256
+      ],
+      "dilations": [
+        1,
+        2,
+        4
+      ],
+      "dropout": 0.32322641377886574,
+      "input_channels": 2,
+      "kernel_size": 5,
+      "name": "tcn"
+    },
+    "train": {
+      "batch_size": 32,
+      "epochs": 100,
+      "grad_clip_norm": 1.0,
+      "learning_rate": 0.0001996720084173413,
+      "min_epochs": 60,
+      "optimizer": "adamw",
+      "patience": 15,
+      "weight_decay": 0.0004985950264838155
+    }
+  },
+  "selection_metric": "best_validation_top1"
+}

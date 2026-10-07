@@ -1,0 +1,35 @@
+experiment:
+  id: e005_yolo_pose59_uniform
+  operation: derive_pose59
+  mode: full
+  description: Derive Uniform-16, Uniform-24, and Uniform-30 Pose59 features from pinned all-frame YOLO shards.
+
+source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: f94c83a148f01630d7091e394a461acb91bad9c9
+  prefix: e005_yolo_pose59_extract
+  identity: c6544234e818c9b7ca17a427a8cbec34979ff01af8778f6b40b49dffb2fd460d
+  parts: [1, 2, 3, 4, 5, 6, 7]
+  manifests:
+    train: manifests/audit/train_clean.csv
+    val: manifests/audit/val_clean.csv
+    test: manifests/vsl400_front_400gloss/test.csv
+  excluded_video_ids: ["019442"]
+  expected_videos:
+    train: 19714
+    val: 2529
+    test: 2508
+  expected_frames: 1587085
+
+sampling:
+  sequence_lengths: [16, 24, 30]
+
+output:
+  root: artifacts/yolo/e005_yolo_pose59_uniform
+
+integrations:
+  hf_artifacts:
+    enabled: true
+    repo_id: hungchill24/vsl400-kp-selection-features
+    private: true
+    max_retries: 3

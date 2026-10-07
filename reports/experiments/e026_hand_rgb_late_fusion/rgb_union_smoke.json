@@ -1,0 +1,24 @@
+{
+  "code_sha256": "0747d7556a67c3265df670a374797f75d4e8ec2df46cc4a45a7fdd19475ddd29",
+  "experiment_id": "e026_rgb_union_smoke",
+  "extraction_identity": "04dbfcdc9bd0df218163d82b81d69878a9592c7d0491436d8d71fcf1a13a82a8",
+  "mode": "smoke",
+  "performance": {
+    "backbone_crops_per_second": 1322.3089945357835,
+    "backbone_forward_seconds": 0.9649786889999632,
+    "configured_batch_size": 256,
+    "device": "cuda",
+    "expected_union_frames": 638,
+    "largest_executed_batch": 256,
+    "processing_crops_per_second": 215.836203800774,
+    "processing_seconds": 5.911890487000051,
+    "seen_union_frames": 638,
+    "valid_crops_encoded": 1276
+  },
+  "runtime_versions": {
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128"
+  },
+  "status": "completed",
+  "total_videos": 15
+}

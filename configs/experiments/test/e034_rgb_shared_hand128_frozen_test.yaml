@@ -1,0 +1,51 @@
+experiment:
+  id: e034_rgb_shared_hand128_frozen_test
+  operation: rgb_test_evaluate
+  mode: full
+manifests:
+  test: manifests/vsl400_front_400gloss/test.csv
+batch_size: 256
+fusion:
+  beta: 0.5
+  epsilon: 1.0e-12
+output:
+  root: artifacts/test_evaluate/e034_rgb_shared_hand128_frozen
+branches:
+  - name: shared_hand128_u24
+    kind: global
+    model:
+      name: rgb_shared_hand128
+    rgb_data:
+      root: artifacts/rgb/e026_rgb_union_test/u24/data
+      receipt: artifacts/rgb/e026_rgb_union_test/receipt.json
+      receipt_sha256: ecf89b3c98c37971a04363a29ed19a043cdec31c750bf3c329d1976b1b2589e1
+      extraction_identity: a36e7d3f061f6bbdbdf3b8b4f384383a01dc95924b165671f8a19a22e7702171
+      view: u24
+    checkpoints:
+      "42": artifacts/runs/e034_rgb_shared_hand128_u24_s42/best.pt
+      "43": artifacts/runs/e034_rgb_shared_hand128_u24_s43/best.pt
+      "44": artifacts/runs/e034_rgb_shared_hand128_u24_s44/best.pt
+    pose_scores:
+      "42": artifacts/test_evaluate/test_e016_tcn_pose53_uniform24_s42/scores.npz
+      "43": artifacts/test_evaluate/test_e016_tcn_pose53_uniform24_s43/scores.npz
+      "44": artifacts/test_evaluate/test_e016_tcn_pose53_uniform24_s44/scores.npz
+    pre_specified_test_extension: true
+  - name: shared_hand128_u30
+    kind: global
+    model:
+      name: rgb_shared_hand128
+    rgb_data:
+      root: artifacts/rgb/e026_rgb_union_test/u30/data
+      receipt: artifacts/rgb/e026_rgb_union_test/receipt.json
+      receipt_sha256: ecf89b3c98c37971a04363a29ed19a043cdec31c750bf3c329d1976b1b2589e1
+      extraction_identity: a36e7d3f061f6bbdbdf3b8b4f384383a01dc95924b165671f8a19a22e7702171
+      view: u30
+    checkpoints:
+      "42": artifacts/runs/e034_rgb_shared_hand128_u30_s42/best.pt
+      "43": artifacts/runs/e034_rgb_shared_hand128_u30_s43/best.pt
+      "44": artifacts/runs/e034_rgb_shared_hand128_u30_s44/best.pt
+    pose_scores:
+      "42": artifacts/test_evaluate/test_e008_tcn_pose53_uniform30_s42/scores.npz
+      "43": artifacts/test_evaluate/test_e008_tcn_pose53_uniform30_s43/scores.npz
+      "44": artifacts/test_evaluate/test_e008_tcn_pose53_uniform30_s44/scores.npz
+    pre_specified_test_extension: true

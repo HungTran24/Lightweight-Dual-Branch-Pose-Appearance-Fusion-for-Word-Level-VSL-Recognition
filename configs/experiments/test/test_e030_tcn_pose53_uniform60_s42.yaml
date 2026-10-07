@@ -1,0 +1,26 @@
+experiment:
+  id: test_e030_tcn_pose53_uniform60
+  operation: test_evaluate
+  mode: full
+  seed: 42
+data:
+  split_path: artifacts/yolo/test_pose59_uniform60/yolo-e005-pose59-uniform60-5851659903dd66a8/data
+  num_classes: 400
+feature:
+  view: pose53
+model:
+  name: tcn
+  input_channels: 2
+  channels: [256, 256, 256]
+  dilations: [1, 2, 4]
+  kernel_size: 5
+  dropout: 0.32322641377886574
+checkpoint:
+  source_experiment: e030_tcn_pose53_uniform60
+  local_path: artifacts/runs/e030_tcn_pose53_uniform60_s42_s42/best.pt
+evaluation:
+  split: test
+  batch_size: 32
+  predictions: true
+output:
+  root: artifacts/test_evaluate

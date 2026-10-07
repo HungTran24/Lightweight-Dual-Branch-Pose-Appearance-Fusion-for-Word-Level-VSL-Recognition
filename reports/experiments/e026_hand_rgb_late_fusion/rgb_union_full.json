@@ -1,0 +1,36 @@
+{
+  "status": "completed",
+  "experiment_id": "e026_rgb_union_full",
+  "extraction_identity": "50ad09795226a00a088797840c2b53452bbfb04638d91e257969bfaa6c0558be",
+  "code_sha256": "0747d7556a67c3265df670a374797f75d4e8ec2df46cc4a45a7fdd19475ddd29",
+  "videos": {
+    "train": 19714,
+    "val": 2529,
+    "total": 22243
+  },
+  "union": {
+    "expected_frames": 942028,
+    "matched_frames": 942028,
+    "valid_crops_encoded": 1878838
+  },
+  "performance": {
+    "batch_size": 256,
+    "processing_seconds": 1641.843753162,
+    "processing_crops_per_second": 1144.3464071301405,
+    "backbone_forward_seconds": 56.21848416899843,
+    "backbone_crops_per_second": 33420.28921221041
+  },
+  "runtime": {
+    "hardware": "A100",
+    "account": "colab-acc2",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128"
+  },
+  "final_files": {
+    "u24_train": {"videos": 19714, "sha256": "357a0b1543695877571999af7fdc86b4482b6e032edd39a1c2ed9b9a5473b9c3"},
+    "u24_val": {"videos": 2529, "sha256": "9670a3a89d2d16586c50a3eb9ca34c1ef8867f9b20779bf35b7bda4551591494"},
+    "u30_train": {"videos": 19714, "sha256": "8c1ca52fd68c6e4ead095ccc3b3d65ae378cfa0dede007c407b521987e108998"},
+    "u30_val": {"videos": 2529, "sha256": "1317d11563a4cc8f1fb40dd52b453b5351f8ae142c2e1f80bd2a481fda01d252"}
+  },
+  "test_split_accessed": false
+}

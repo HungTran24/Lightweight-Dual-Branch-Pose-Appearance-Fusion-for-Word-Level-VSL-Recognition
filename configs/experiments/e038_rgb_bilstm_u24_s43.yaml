@@ -1,0 +1,28 @@
+experiment:
+  id: e038_rgb_bilstm_u24_s43
+  operation: e038_rgb_bilstm_train
+  mode: full
+  seed: 43
+manifests:
+  train: manifests/audit/train_clean.csv
+  val: manifests/audit/val_clean.csv
+excluded_video_ids: ["019442"]
+rgb_data:
+  root: artifacts/rgb/e038_rgb_frame_u24_full/data
+model:
+  name: rgb_bilstm
+  input_dim: 1152
+  projection_dim: 256
+  hidden_size: 128
+  dropout: 0.0
+train:
+  epochs: 100
+  min_epochs: 60
+  patience: 15
+  batch_size: 256
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+output:
+  root: artifacts/runs/e038_rgb_bilstm_u24_s43

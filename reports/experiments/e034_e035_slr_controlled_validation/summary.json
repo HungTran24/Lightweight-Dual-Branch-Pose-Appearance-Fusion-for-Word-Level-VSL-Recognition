@@ -1,0 +1,273 @@
+{
+  "status": "complete",
+  "purpose": "3-seed controlled architecture references under the clean front-view Uniform-30 protocol.",
+  "presentation_namespace": {
+    "SLR-E034": "e034_spoter_pose54_controlled_u30",
+    "SLR-E035": "e035_slgcn_bone_pose27_controlled_u30"
+  },
+  "data": {
+    "repo_id": "hungchill24/vsl400-kp-selection-features",
+    "revision": "5a0042e1daec2813f74f08fa955276c777e2b40a",
+    "artifact_path": "yolo-e005-pose59-uniform30-a65d7d605573ea13",
+    "development_split": "clean signer-disjoint train/validation",
+    "frozen_evaluation_split": "test"
+  },
+  "summary_frozen_test_3seed": {
+    "SLR-E034_spoter_pose54": {
+      "top1_mean": 0.8839712937672933,
+      "top1_std": 0.0060205879865173,
+      "top5_mean": 0.986709197362264,
+      "top5_std": 0.0008300080682107,
+      "macro_f1_mean": 0.8827076951662699,
+      "macro_f1_std": 0.0066128775072135,
+      "loss_mean": 0.3815500951574591,
+      "loss_std": 0.0196687274007738
+    },
+    "SLR-E035_slgcn_bone_pose27": {
+      "top1_mean": 0.9178628325462341,
+      "top1_std": 0.0034066927702946,
+      "top5_mean": 0.9922913312911987,
+      "top5_std": 0.0015095600094816,
+      "macro_f1_mean": 0.9183246294657389,
+      "macro_f1_std": 0.0030305912244728,
+      "loss_mean": 0.2860190491169762,
+      "loss_std": 0.0059292531397248
+    }
+  },
+  "summary_validation_3seed": {
+    "SLR-E034_spoter_pose54": {
+      "top1_mean": 0.7859496474266052,
+      "top1_std": 0.005116773539132277,
+      "top5_mean": 0.9343613982200623,
+      "top5_std": 0.00039540822695583157,
+      "macro_f1_mean": 0.7868210693200429,
+      "macro_f1_std": 0.004331580228800971,
+      "loss_mean": 0.9452495341652181,
+      "loss_std": 0.014277740118844837
+    },
+    "SLR-E035_slgcn_bone_pose27": {
+      "top1_mean": 0.8488203684488932,
+      "top1_std": 0.006965163155700204,
+      "top5_mean": 0.961117684841156,
+      "top5_std": 0.003080643916298544,
+      "macro_f1_mean": 0.8494041697184244,
+      "macro_f1_std": 0.007365063080208154,
+      "loss_mean": 0.692389865980005,
+      "loss_std": 0.037084534165682855
+    }
+  },
+  "models": [
+    {
+      "experiment_id": "e034_spoter_pose54_controlled_u30",
+      "seed": 42,
+      "model": "spoter_pose54_controlled",
+      "feature_view": "spoter54",
+      "epochs_trained": 100,
+      "best_epoch": 46,
+      "validation": {
+        "top1": 0.781731903553009,
+        "top5": 0.9343613982200623,
+        "macro_f1": 0.7827374935150146,
+        "loss": 0.9323281400191449,
+        "samples": 2529
+      },
+      "frozen_test": {
+        "checkpoint_epoch": 46,
+        "top1": 0.8775917291641235,
+        "top5": 0.9876395463943481,
+        "macro_f1": 0.875750720500946,
+        "loss": 0.39840360622752036,
+        "samples": 2508
+      },
+      "evidence": "artifacts/runs/e034_spoter_pose54_controlled_u30_s42/summary.json"
+    },
+    {
+      "experiment_id": "e034_spoter_pose54_controlled_u30",
+      "seed": 43,
+      "model": "spoter_pose54_controlled",
+      "feature_view": "spoter54",
+      "epochs_trained": 100,
+      "best_epoch": 71,
+      "validation": {
+        "top1": 0.791617214679718,
+        "top5": 0.9347568154335022,
+        "macro_f1": 0.7913639545440674,
+        "loss": 0.9605838584541662,
+        "samples": 2529
+      },
+      "frozen_test": {
+        "checkpoint_epoch": 71,
+        "top1": 0.889553427696228,
+        "top5": 0.9860446453094482,
+        "macro_f1": 0.8889120817184448,
+        "loss": 0.35993894691648853,
+        "samples": 2508
+      },
+      "evidence": "artifacts/runs/e034_spoter_pose54_controlled_u30_s43/summary.json",
+      "frozen_test_evidence": "artifacts/test_evaluate/test_e034_spoter_pose54_controlled_u30_s43/summary.json"
+    },
+    {
+      "experiment_id": "e034_spoter_pose54_controlled_u30",
+      "seed": 44,
+      "model": "spoter_pose54_controlled",
+      "feature_view": "spoter54",
+      "epochs_trained": 100,
+      "best_epoch": 53,
+      "training_runtime": "NVIDIA L4",
+      "validation": {
+        "top1": 0.7844998240470886,
+        "top5": 0.9339659810066223,
+        "macro_f1": 0.7863617539405823,
+        "loss": 0.9428363820223433,
+        "samples": 2529
+      },
+      "frozen_test": {
+        "checkpoint_epoch": 53,
+        "top1": 0.8847687244415283,
+        "top5": 0.9864434003829956,
+        "macro_f1": 0.883460283279419,
+        "loss": 0.3863077323283685,
+        "samples": 2508
+      },
+      "evidence": "artifacts/runs/e034_spoter_pose54_controlled_u30_s44/summary.json",
+      "frozen_test_evidence": "artifacts/test_evaluate/test_e034_spoter_pose54_controlled_u30_s44/summary.json"
+    },
+    {
+      "experiment_id": "e035_slgcn_bone_pose27_controlled_u30",
+      "seed": 42,
+      "model": "slgcn_bone_controlled",
+      "feature_view": "slgcn27",
+      "epochs_trained": 100,
+      "best_epoch": 84,
+      "training_runtime": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "validation": {
+        "top1": 0.8497430086135864,
+        "top5": 0.963621973991394,
+        "macro_f1": 0.8500516414642334,
+        "loss": 0.6799666605810254,
+        "samples": 2529
+      },
+      "frozen_test": {
+        "checkpoint_epoch": 84,
+        "top1": 0.9174641370773315,
+        "top5": 0.9912280440330505,
+        "macro_f1": 0.9175439476966858,
+        "loss": 0.2911459879438724,
+        "samples": 2508
+      },
+      "evidence": "artifacts/runs/e035_slgcn_bone_pose27_controlled_u30_s42/summary.json"
+    },
+    {
+      "experiment_id": "e035_slgcn_bone_pose27_controlled_u30",
+      "seed": 43,
+      "model": "slgcn_bone_controlled",
+      "feature_view": "slgcn27",
+      "epochs_trained": 100,
+      "best_epoch": 57,
+      "training_runtime": "NVIDIA A100-SXM4-40GB",
+      "validation": {
+        "top1": 0.8414393067359924,
+        "top5": 0.9576907753944396,
+        "macro_f1": 0.8417373895645142,
+        "loss": 0.6631749900917424,
+        "samples": 2529
+      },
+      "frozen_test": {
+        "checkpoint_epoch": 57,
+        "top1": 0.9146730303764343,
+        "top5": 0.9916267991065979,
+        "macro_f1": 0.9157607555389404,
+        "loss": 0.2873852001042647,
+        "samples": 2508
+      },
+      "evidence": "artifacts/runs/e035_slgcn_bone_pose27_controlled_u30_s43/summary.json",
+      "frozen_test_evidence": "artifacts/test_evaluate/test_e035_slgcn_bone_pose27_controlled_u30_s43/summary.json"
+    },
+    {
+      "experiment_id": "e035_slgcn_bone_pose27_controlled_u30",
+      "seed": 44,
+      "model": "slgcn_bone_controlled",
+      "feature_view": "slgcn27",
+      "epochs_trained": 100,
+      "best_epoch": 49,
+      "training_runtime": "NVIDIA A100-SXM4-40GB",
+      "validation": {
+        "top1": 0.8552787899971008,
+        "top5": 0.9620403051376344,
+        "macro_f1": 0.8564234972000122,
+        "loss": 0.7340273159254488,
+        "samples": 2529
+      },
+      "frozen_test": {
+        "checkpoint_epoch": 49,
+        "top1": 0.9214513301849365,
+        "top5": 0.9940191507339478,
+        "macro_f1": 0.9216691851615906,
+        "loss": 0.27952595930279156,
+        "samples": 2508
+      },
+      "evidence": "artifacts/runs/e035_slgcn_bone_pose27_controlled_u30_s44/summary.json",
+      "frozen_test_evidence": "artifacts/test_evaluate/test_e035_slgcn_bone_pose27_controlled_u30_s44/summary.json"
+    }
+  ],
+  "a100_fp32_microbenchmark": {
+    "hardware": "NVIDIA A100-SXM4-40GB",
+    "protocol": "inputs on GPU; 50 warm-ups; 200 batch-1 iterations; 100 batch-32 iterations",
+    "spoter_pose54_controlled_u30_seed42": {
+      "checkpoint_epoch": 46,
+      "parameters": 5949640,
+      "model_state_bytes_fp32": 23798560,
+      "batch1_median_latency_ms": 7.135232210159302,
+      "batch1_p95_latency_ms": 7.637299156188964,
+      "batch32_throughput_samples_s": 4098.914347114317,
+      "batch32_peak_vram_bytes": 74613760
+    },
+    "slgcn_bone_pose27_controlled_u30_epoch10": {
+      "checkpoint_epoch": 10,
+      "checkpoint_note": "Only retrievable checkpoint at benchmark time; used for unchanged architecture measurement only, not validation or frozen-test accuracy.",
+      "parameters": 3882992,
+      "model_state_bytes_fp32": 15531968,
+      "batch1_median_latency_ms": 14.61350393295288,
+      "batch1_p95_latency_ms": 15.078809261322021,
+      "batch32_throughput_samples_s": 2117.2301914546597,
+      "batch32_peak_vram_bytes": 146503680
+    }
+  },
+  "cpu_fp32_microbenchmark": {
+    "cpu": "AMD Ryzen 7 7735HS with Radeon Graphics",
+    "threading": {
+      "intra_op_threads": 8,
+      "inter_op_threads": 1
+    },
+    "protocol": "inputs on CPU; 50 warm-ups; 200 batch-1 iterations; 100 batch-32 iterations",
+    "tcn_pose53_u30_seed42": {
+      "parameters": 2101092,
+      "batch1_median_latency_ms": 2.8321605,
+      "batch1_p95_latency_ms": 4.1715439,
+      "batch32_throughput_samples_s": 2958.4258416529915
+    },
+    "stgcn_pose53_u30_seed42": {
+      "parameters": 3251602,
+      "batch1_median_latency_ms": 16.9535715,
+      "batch1_p95_latency_ms": 21.3955048,
+      "batch32_throughput_samples_s": 48.25083055591606
+    },
+    "spoter_pose54_u30_seed42": {
+      "parameters": 5949640,
+      "batch1_median_latency_ms": 3.8823735,
+      "batch1_p95_latency_ms": 8.49744145,
+      "batch32_throughput_samples_s": 945.1449613751183
+    },
+    "slgcn_bone_pose27_u30_epoch10": {
+      "parameters": 3882992,
+      "batch1_median_latency_ms": 16.3464015,
+      "batch1_p95_latency_ms": 27.36832255,
+      "batch32_throughput_samples_s": 67.825771026292
+    }
+  },
+  "limitations": [
+    "Both references are controlled adaptations on project features, not faithful reproductions of SPOTER, full SL-GCN/SAM-SLR, or VSL400 baselines.",
+    "Validation and frozen test report 3-seed mean and sample standard deviation (seeds 42, 43, 44).",
+    "Classifier benchmarks use pre-materialized input and are not end-to-end latency, edge, mobile, or low-power measurements."
+  ]
+}

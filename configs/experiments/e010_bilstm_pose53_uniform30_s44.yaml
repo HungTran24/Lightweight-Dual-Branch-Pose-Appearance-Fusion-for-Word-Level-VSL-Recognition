@@ -1,0 +1,38 @@
+experiment:
+  id: e010_bilstm_pose53_uniform30
+  mode: full
+  seed: 44
+data:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform30-a65d7d605573ea13
+  num_classes: 400
+feature:
+  view: pose53
+model:
+  name: bilstm
+  input_channels: 2
+  hidden_size: 128
+train:
+  epochs: 100
+  min_epochs: 60
+  patience: 15
+  batch_size: 32
+  optimizer: adam
+  learning_rate: 0.0001
+  weight_decay: 0.0005
+  grad_clip_norm: 1.0
+evaluation:
+  validation: true
+  predictions: true
+output:
+  root: artifacts/runs
+integrations:
+  wandb:
+    enabled: true
+    project: vsl400-recognition
+  hf_checkpoints:
+    enabled: true
+    repo_id: hungchill24/vsl400-kp-selection-models
+    private: true
+    upload_every_epochs: 5

@@ -1,0 +1,35 @@
+experiment:
+  id: e025_stgcn_pose53_train_hearing_diagnostic
+  operation: signer_diagnostic
+  mode: full
+  seed: 42
+
+data:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform30-a65d7d605573ea13
+  num_classes: 400
+
+feature:
+  view: pose53
+
+model:
+  name: stgcn
+  input_channels: 2
+  temporal_kernel: 9
+  dropout: 0.5
+
+checkpoint:
+  source_experiment: e013_stgcn_pose53_uniform30_s42
+  repo_id: hungchill24/vsl400-kp-selection-models
+  revision: 7bf539b8a4c4c9a6eb09a909d441509268f351c9
+  path: runs/e013_stgcn_pose53_uniform30_s42/best.pt
+
+diagnostic:
+  split: train
+  manifest: manifests/audit/train_clean.csv
+  signers: ["024", "025", "026", "027"]
+  batch_size: 32
+
+output:
+  root: artifacts/reports

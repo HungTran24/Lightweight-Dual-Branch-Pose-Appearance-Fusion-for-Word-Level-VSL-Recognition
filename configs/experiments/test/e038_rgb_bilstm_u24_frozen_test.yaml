@@ -1,0 +1,29 @@
+experiment:
+  id: e038_rgb_bilstm_u24_frozen_test
+  operation: e038_test_evaluate
+  mode: full
+manifests:
+  test: manifests/vsl400_front_400gloss/test.csv
+excluded_video_ids: []
+batch_size: 256
+rgb_data:
+  root: artifacts/rgb/e038_rgb_frame_u24_full/data
+model:
+  name: rgb_bilstm
+  input_dim: 1152
+  projection_dim: 256
+  hidden_size: 128
+  dropout: 0.0
+checkpoints:
+  "42": artifacts/runs/e038_rgb_bilstm_u24_s42/best.pt
+  "43": artifacts/runs/e038_rgb_bilstm_u24_s43/best.pt
+  "44": artifacts/runs/e038_rgb_bilstm_u24_s44/best.pt
+pose_scores:
+  "42": artifacts/test_evaluate/test_e016_tcn_pose53_uniform24_s42/scores.npz
+  "43": artifacts/test_evaluate/test_e016_tcn_pose53_uniform24_s43/scores.npz
+  "44": artifacts/test_evaluate/test_e016_tcn_pose53_uniform24_s44/scores.npz
+fusion:
+  beta: 0.5
+  epsilon: 1.0e-12
+output:
+  root: artifacts/test_evaluate/e038_rgb_bilstm_u24_frozen_test

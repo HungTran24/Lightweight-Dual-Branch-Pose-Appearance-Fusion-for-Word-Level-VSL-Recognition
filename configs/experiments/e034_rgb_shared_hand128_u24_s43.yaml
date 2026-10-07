@@ -1,0 +1,37 @@
+experiment:
+  id: e034_rgb_shared_hand128_u24_s43
+  operation: e026_rgb_train
+  mode: full
+  seed: 43
+manifests:
+  train: manifests/audit/train_clean.csv
+  val: manifests/audit/val_clean.csv
+expected_videos:
+  train: 19714
+  val: 2529
+excluded_video_ids: ["019442"]
+rgb_data:
+  view: u24
+  root: artifacts/rgb/e026_rgb_union_full/u24/data
+  receipt: artifacts/rgb/e026_rgb_union_full/receipt.json
+  receipt_sha256: b095aacfe2f21b220ae2932cc74f34e1d7e2bf05a025cf59c228ffcec4ebbab0
+  extraction_identity: 50ad09795226a00a088797840c2b53452bbfb04638d91e257969bfaa6c0558be
+model:
+  name: rgb_shared_hand128
+train:
+  epochs: 100
+  min_epochs: 60
+  patience: 15
+  batch_size: 256
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+output:
+  root: artifacts/runs/e034_rgb_shared_hand128_u24_s43
+integrations:
+  wandb:
+    enabled: true
+    project: vsl400-recognition
+  hf_checkpoints:
+    enabled: false

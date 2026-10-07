@@ -1,0 +1,105 @@
+{
+  "experiment_id": "e021_yolo_pose59_bbox_handrgb_full",
+  "scope": "all-frame YOLO inference with aligned Pose59, native object boxes, and RGB hand crops",
+  "status": "ok",
+  "source_commit": "286228253779a56bca4956a3db27a382a280046a",
+  "identity": "db7ffa2f0b434e05d024c11733663cd55389c191de9dabca3994abcc02abcc3f",
+  "checkpoint": {
+    "repo_id": "hungchill24/vsl400-kp-selection-models",
+    "revision": "8f3c52134d8499741d5394e240d05e127f7a2d84",
+    "path": "runs/e005_yolo_person17_hand21_discriminative_max30_s42/best.pt",
+    "sha256": "0ee2a0e349f79550271550274aa4e5e17fa09ab1c8b6de5c141392dbebb4a505"
+  },
+  "data": {
+    "repo_id": "hungchill24/vsl400-front-view",
+    "revision": "df5509963c62b2adaa18525d2990c8b30a100829",
+    "videos": 24751,
+    "frames": 1587085,
+    "excluded_video_ids": [
+      "019442"
+    ],
+    "split_counts": {
+      "train": {
+        "videos": 19714,
+        "frames": 1273293
+      },
+      "val": {
+        "videos": 2529,
+        "frames": 159504
+      },
+      "test": {
+        "videos": 2508,
+        "frames": 154288
+      }
+    }
+  },
+  "protocol": {
+    "batch_size": 128,
+    "amp": true,
+    "image_size": 640,
+    "nms_confidence": 0.25,
+    "nms_iou": 0.7,
+    "max_detections": 300,
+    "crop_margin": 1.3,
+    "jpeg_quality": 95,
+    "crop_shard_frames": 4096,
+    "crop_resolution": "native square without resize",
+    "padding_rgb": [
+      114,
+      114,
+      114
+    ]
+  },
+  "outputs": {
+    "pose_fields": [
+      "X",
+      "keypoint_valid_mask",
+      "object_confidence",
+      "object_bbox_xyxy",
+      "object_valid_mask",
+      "frame_idx",
+      "video_id",
+      "split",
+      "frame_width",
+      "frame_height",
+      "video_frame_offsets"
+    ],
+    "crop_format": "Parquet with nullable JPEG binary columns",
+    "crop_shards": 392,
+    "files": 408,
+    "crop_bytes": 13223792335,
+    "total_remote_bytes": 13639935900
+  },
+  "detections": {
+    "person_missing_rate": 0.0,
+    "left_hand_missing_rate": 0.0026873166843615812,
+    "right_hand_missing_rate": 0.003122076007271192,
+    "left_crops": 1582820,
+    "right_crops": 1582130,
+    "total_crops": 3164950
+  },
+  "performance": {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.146",
+    "forward_calls": 12403,
+    "mean_effective_batch": 127.95976779811336,
+    "total_seconds": 7213.270550521001,
+    "frames_per_second": 220.02569881114045,
+    "timings_seconds": {
+      "download": 24.999524729000086,
+      "decode": 766.5841286341968,
+      "letterbox": 1044.7101856819493,
+      "inference_nms": 3630.471620842006,
+      "crop_encode": 367.6355975584406,
+      "write": 73.73295144499957
+    }
+  },
+  "artifact": {
+    "repo_id": "hungchill24/vsl400-kp-selection-features",
+    "path": "e021_yolo_pose59_bbox_handrgb_full/",
+    "revision": "7edced63aedc81908624119314dba5dc7c486ce7",
+    "verification": "Exact 408-file set checked; all NPZ and Parquet LFS SHA256 values and Parquet byte sizes matched completion markers. Summary counts matched all seven part markers."
+  },
+  "operational_note": "The remote experiment and HF uploads completed successfully. The launcher returned a local error only after completion because the Colab SSH endpoint disappeared during final metadata retrieval; metadata was subsequently downloaded and verified directly from the pinned HF revision."
+}

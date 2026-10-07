@@ -1,0 +1,49 @@
+experiment:
+  id: benchmark_frontends_pose_cpu_ryzen7_7735hs
+  operation: frontend_benchmark
+  mode: smoke
+  description: Uniform-30 CPU benchmark of MediaPipe, RTMDet-nano plus RTMW-m, and E005 dual-head YOLO.
+
+hardware:
+  kind: cpu
+  cpu_threads: 8
+  interop_threads: 1
+
+data:
+  dataset_repo: hungchill24/vsl400-front-view
+  dataset_revision: df5509963c62b2adaa18525d2990c8b30a100829
+  manifest: manifests/audit/val_clean.csv
+  signer_counts: {"006": 4, "020": 3, "028": 3}
+  selection_seed: 42
+  frames_per_video: 30
+  expected_frames: 300
+
+protocol:
+  precision: float32
+  warmup_passes: 1
+  nms_confidence: 0.25
+  nms_iou: 0.7
+  max_detections: 300
+  timing_boundary: preprocess + transfer + inference + postprocess; decode and model load excluded
+
+backends: [mediapipe, rtmw, yolo, yolo_onnx]
+
+yolo_onnx:
+  path: artifacts/yolo/onnx/e005_dual_head_b1_640/model.onnx
+  sha256: b9d477485901ba79cab5c73dc831f4623bf116ce0a0b72daec27bcded8bf1736
+
+yolo_checkpoint:
+  repo_id: hungchill24/vsl400-kp-selection-models
+  revision: 8f3c52134d8499741d5394e240d05e127f7a2d84
+  path: runs/e005_yolo_person17_hand21_discriminative_max30_s42/best.pt
+
+yolo_model:
+  name: yolo26m-pose.pt
+  architecture: yolo26m-pose.yaml
+  ultralytics_version: 8.4.146
+  person_keypoints: 17
+  hand_keypoints: 21
+  image_size: 640
+
+output:
+  root: artifacts/benchmarks/frontend_pose_cpu_ryzen7_7735hs

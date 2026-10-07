@@ -1,0 +1,36 @@
+experiment:
+  id: e101_uniform24_tcn_pose53
+  mode: full
+  seed: 42
+
+data:
+  split_path: artifacts/frame_selection_splits/uniform_24_pose53
+  num_classes: 400
+
+feature:
+  view: pose53
+
+model:
+  name: tcn
+  input_channels: 2
+  channels: [256, 256, 256]
+  dilations: [1, 2, 4]
+  kernel_size: 5
+  dropout: 0.32322641377886574
+
+train:
+  epochs: 100
+  patience: 15
+  min_epochs: 10
+  batch_size: 32
+  optimizer: adamw
+  learning_rate: 0.0001996720084173413
+  weight_decay: 0.0004985950264838155
+  grad_clip_norm: 1.0
+
+evaluation:
+  validation: true
+  predictions: true
+
+output:
+  root: artifacts/runs

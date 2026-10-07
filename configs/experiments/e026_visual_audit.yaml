@@ -1,0 +1,33 @@
+experiment:
+  id: e026_visual_audit
+  operation: e026_visual_audit
+  mode: full
+  description: E026 Phase C deterministic visual crop audit (32 samples) for clean train and validation.
+
+e021_source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 7edced63aedc81908624119314dba5dc7c486ce7
+  prefix: e021_yolo_pose59_bbox_handrgb_full
+  identity: db7ffa2f0b434e05d024c11733663cd55389c191de9dabca3994abcc02abcc3f
+  parts: [1, 2, 3, 4, 5, 6, 7]
+
+uniform30_source:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform30-a65d7d605573ea13
+
+manifests:
+  train: manifests/audit/train_clean.csv
+  val: manifests/audit/val_clean.csv
+
+excluded_video_ids: ["019442"]
+
+expected_videos:
+  train: 19714
+  val: 2529
+
+sampling:
+  seed: 42
+
+output:
+  root: reports/experiments/e026_hand_rgb_late_fusion/visual_audit

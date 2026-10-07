@@ -1,0 +1,19 @@
+experiment:
+  operation: e036_rgb_signer_report
+  mode: full
+report:
+  manifest: manifests/audit/val_clean.csv
+  signers: ["006", "020", "028"]
+  sources:
+    - name: rgb_linear_u30
+      archives:
+        42: artifacts/runs/e026_rgb_linear_u30_s42/scores.npz
+        43: artifacts/runs/e026_rgb_linear_u30_s43/scores.npz
+        44: artifacts/runs/e026_rgb_linear_u30_s44/scores.npz
+    - name: rgb_temporal3_u30
+      archives:
+        42: artifacts/runs/e028_rgb_temporal3_s42/scores.npz
+        43: artifacts/runs/e028_rgb_temporal3_s43/scores.npz
+        44: artifacts/runs/e028_rgb_temporal3_s44/scores.npz
+output:
+  root: reports/experiments/e036_redflag_signer_domain

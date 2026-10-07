@@ -1,0 +1,130 @@
+{
+  "status": "complete",
+  "purpose": "Fixed clean-validation Uniform-30 frontend runtime and complexity evidence. This is an evaluated runtime configuration benchmark, not end-to-end recognition or an architecture-only ranking.",
+  "protocol": {
+    "population": "manifests/audit/val_clean.csv",
+    "selection_seed": 42,
+    "signer_allocation": {"006": 4, "020": 3, "028": 3},
+    "video_ids": [
+      "003570",
+      "004011",
+      "004144",
+      "004206",
+      "015360",
+      "015555",
+      "015676",
+      "024150",
+      "024448",
+      "024641"
+    ],
+    "manifest_sha256": "1bd92e5de767b60a1ba86dd907c6db3c54c37252884b98638a8f19e33a4a73f1",
+    "real_frames": 300,
+    "sampling": "30 real Uniform-30 frames per video",
+    "warmup": "one full 300-frame pass, discarded",
+    "measurement": "one B=1 pass over the same 300 frames",
+    "timing_boundary": "preprocess + transfer where applicable + inference + NMS/output selection; excludes archive download, decode, model initialization/checkpoint load, artifact writing, and classifier forward"
+  },
+  "a100": {
+    "hardware": "NVIDIA A100-SXM4-40GB",
+    "runtime": "PyTorch 2.0.1+cu118, FP32, B=1",
+    "rows": [
+      {
+        "name": "RTMDet-nano + RTMW-m",
+        "topology": "RTMDet-nano person 320x320 -> RTMW-m 133 whole-body keypoints",
+        "median_latency_ms": 56.41945,
+        "p95_latency_ms": 58.59642725,
+        "throughput_frames_s": 17.673094923653153,
+        "peak_vram_bytes": 289022464,
+        "output_presence_rate": 1.0
+      },
+      {
+        "name": "E005 dual-head YOLO",
+        "topology": "Pose59: Person17 + Left Hand21 + Right Hand21",
+        "median_latency_ms": 26.8037845,
+        "p95_latency_ms": 27.72552715,
+        "throughput_frames_s": 37.235086365555915,
+        "peak_vram_bytes": 421355008,
+        "output_presence_rate": 1.0
+      }
+    ]
+  },
+  "cpu": {
+    "hardware": "AMD Ryzen 7 7735HS with Radeon Graphics",
+    "runtime": "PyTorch 2.0.1+cu117; ONNX Runtime 1.23.2 for the ONNX row",
+    "threading": {"intra_op_threads": 8, "inter_op_threads": 1},
+    "rows": [
+      {
+        "name": "MediaPipe Holistic",
+        "runtime": "TFLite/XNNPACK",
+        "topology": "33 pose + 468 face + 21 per hand",
+        "median_latency_ms": 27.75289,
+        "p95_latency_ms": 30.2075056,
+        "throughput_frames_s": 35.738230405239165,
+        "output_presence_rate": 1.0
+      },
+      {
+        "name": "RTMDet-nano + RTMW-m",
+        "runtime": "PyTorch",
+        "topology": "RTMDet-nano person 320x320 -> RTMW-m 133 whole-body keypoints",
+        "median_latency_ms": 103.51624000000001,
+        "p95_latency_ms": 119.86451195000001,
+        "throughput_frames_s": 9.431001334256697,
+        "output_presence_rate": 1.0
+      },
+      {
+        "name": "E005 dual-head YOLO",
+        "runtime": "PyTorch",
+        "topology": "Pose59: Person17 + Left Hand21 + Right Hand21",
+        "median_latency_ms": 255.49696649999998,
+        "p95_latency_ms": 339.2605234,
+        "throughput_frames_s": 3.7015056582943067,
+        "output_presence_rate": 1.0
+      },
+      {
+        "name": "E005 dual-head YOLO",
+        "runtime": "ONNX Runtime CPUExecutionProvider",
+        "topology": "Pose59: Person17 + Left Hand21 + Right Hand21",
+        "onnx_sha256": "b9d477485901ba79cab5c73dc831f4623bf116ce0a0b72daec27bcded8bf1736",
+        "median_latency_ms": 277.66151449999995,
+        "p95_latency_ms": 314.25757030000005,
+        "throughput_frames_s": 3.7501148563615048,
+        "output_presence_rate": 1.0
+      }
+    ]
+  },
+  "frontend_complexity": {
+    "protocol": "B=1, 640x640; Ultralytics THOP-backed helper; FLOPs = 2 x MACs",
+    "rows": [
+      {"name": "Stock YOLO26m-pose current unfused graph", "parameters": 24344482, "estimated_flops_g": 86.1353856},
+      {"name": "E005 custom dual-head current unfused graph", "parameters": 24621919, "estimated_flops_g": 87.034176}
+    ],
+    "e005_overhead_against_stock_current_graph": {
+      "parameters_percent": 1.14,
+      "estimated_flops_percent": 1.04
+    }
+  },
+  "classifier_complexity": {
+    "protocol": "B=1, Uniform-30, exact project input topology; parameters exact, THOP FLOPs estimated",
+    "rows": [
+      {"name": "BiLSTM Pose53", "parameters": 345000, "estimated_flops_g": 0.0149},
+      {"name": "TCN Pose53", "parameters": 2101092, "estimated_flops_g": 0.1202},
+      {"name": "SPOTER controlled Pose54", "parameters": 5949640, "estimated_flops_g": 0.1932},
+      {"name": "SL-GCN bone controlled Pose27", "parameters": 3882992, "estimated_flops_g": 1.4529},
+      {"name": "ST-GCN Pose53", "parameters": 3251602, "estimated_flops_g": 3.5763}
+    ]
+  },
+  "limitations": [
+    "The ONNX graph is parity-verified and improves packaging/portability, but did not reduce CPU median latency in this run.",
+    "No result is a complete video-pipeline real-time, mobile, edge, or low-power claim.",
+    "RTMW paper FLOPs/latency values are pose-network-only ONNX measurements and are not substituted for the detector-plus-pose rows here.",
+    "Classifier FLOPs are estimates because module hooks can omit functional graph or attention operators."
+  ],
+  "sources": {
+    "cpu_artifact": "artifacts/benchmarks/frontend_pose_cpu_ryzen7_7735hs/summary.json",
+    "a100_artifact": "artifacts/benchmarks/frontend_pose_a100/summary.json",
+    "cpu_config": "configs/experiments/benchmark_frontends_pose_cpu_ryzen7_7735hs.yaml",
+    "a100_config": "configs/experiments/benchmark_frontends_pose_a100.yaml",
+    "onnx_parity": "reports/experiments/e005_yolo_dual_head_onnx_export/summary.json",
+    "classifier_efficiency": "reports/experiments/efficiency_benchmark/README.md"
+  }
+}

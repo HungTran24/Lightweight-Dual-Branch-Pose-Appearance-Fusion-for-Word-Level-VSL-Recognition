@@ -1,0 +1,33 @@
+{
+  "baseline_fused_metrics": {
+    "macro_f1": 0.8550947308540344,
+    "top1": 0.8501383662223816,
+    "top5": 0.9624357223510742
+  },
+  "baseline_rgb_metrics": {
+    "macro_f1": 0.5274841785430908,
+    "top1": 0.5053380727767944,
+    "top5": 0.7212336659431458
+  },
+  "beta": 0.5,
+  "candidate_fused_metrics": {
+    "macro_f1": 0.8568797707557678,
+    "top1": 0.8536971211433411,
+    "top5": 0.9667853116989136
+  },
+  "candidate_rgb_metrics": {
+    "macro_f1": 0.6120942831039429,
+    "top1": 0.5958877205848694,
+    "top5": 0.8078292012214661
+  },
+  "continuation": "stop_after_seed_42",
+  "deltas": {
+    "macro_f1": 0.0017850399017333984,
+    "top1": 0.0035587549209594727,
+    "top5": 0.0043495893478393555
+  },
+  "epsilon": 1e-12,
+  "formula": "log(max(p_pose, eps)) + 0.5 * log(max(p_rgb, eps))",
+  "gate_passed": false,
+  "status": "ok"
+}

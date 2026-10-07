@@ -1,0 +1,68 @@
+experiment:
+  id: e004_yolo_person17_hand21_one_epoch
+  operation: train
+  mode: full
+  seed: 42
+
+data:
+  dataset_repo: hungchill24/vsl400-front-view
+  dataset_revision: df5509963c62b2adaa18525d2990c8b30a100829
+  rtmw_repo: hungchill24/vsl400-rtmw-raw
+  rtmw_revision: 5fdb1efd1296d64b3e2445924869667cdc634463
+  rtmw_prefix: rtmw-raw-v1-69b596d53b27537a
+  canonical_manifest_dir: manifests/vsl400_front_400gloss
+  rtmw_manifest: manifests/rtmw_full400/rtmw_manifest_full.json
+  parts: [1, 2, 3, 4, 5, 6, 7]
+  train_videos: 7995
+  val_videos: 1200
+  frames_per_video: 24
+  keypoint_score_threshold: 0.3
+  known_decode_defect: "019442"
+
+model:
+  name: yolo26m-pose.pt
+  architecture: yolo26m-pose.yaml
+  ultralytics_version: 8.4.146
+  person_keypoints: 17
+  hand_keypoints: 21
+  image_size: 640
+
+train:
+  epochs: 1
+  batch_size: 64
+  workers: 8
+  shuffle: true
+  amp: true
+  optimizer: adamw
+  learning_rate: 0.0001
+  weight_decay: 0.0
+  checkpoint_every_batches: 500
+  log_every_batches: 50
+  print_every_batches: 250
+
+evaluation:
+  batch_size: 64
+  metric_nms_confidence: 0.001
+  metric_nms_iou: 0.7
+  nms_confidence: 0.25
+  nms_iou: 0.7
+  max_detections: 300
+  overlay_samples: 12
+  benchmark_warmup: 3
+  benchmark_runs: 10
+
+output:
+  root: artifacts/yolo/e004_yolo_person17_hand21_one_epoch
+  data_dir: data
+  run_dir: run
+
+integrations:
+  wandb:
+    enabled: true
+    project: vsl400-recognition
+    id: e004-yolo-person17-hand21-one-epoch-s42
+    resume: allow
+  hf_checkpoints:
+    enabled: true
+    repo_id: hungchill24/vsl400-kp-selection-models
+    private: true

@@ -1,0 +1,52 @@
+experiment:
+  id: e036_redflag_rtmw_tcn
+  mode: full
+  seed: 43
+data:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 14ceaa42123a556bb1067a6690142536e88187a5
+  artifact_path: rtmw-derived-view-v2-pose53-d84006088ffa9362
+  num_classes: 400
+  signer_partition:
+    manifests:
+      train: manifests/audit/train_clean.csv
+      val: manifests/audit/val_clean.csv
+    excluded_video_ids: ["019442", "024029"]
+    prohibited_signers: ["003", "012", "019"]
+    train:
+      source: train
+      signers: ["001", "002", "004", "007", "008", "009", "010", "011", "013", "014", "015", "016", "018", "021", "022", "023", "024", "025"]
+      expected_samples: 17062
+    val:
+      sources:
+        train: ["026", "027"]
+        val: ["006", "020", "028"]
+      expected_samples: 5181
+feature:
+  view: pose53
+model:
+  name: tcn
+  input_channels: 2
+  channels: [256, 256, 256]
+  dilations: [1, 2, 4]
+  kernel_size: 5
+  dropout: 0.32322641377886574
+train:
+  epochs: 100
+  min_epochs: 60
+  patience: 15
+  batch_size: 32
+  optimizer: adamw
+  learning_rate: 0.0001996720084173413
+  weight_decay: 0.0004985950264838155
+  grad_clip_norm: 1.0
+evaluation:
+  validation: true
+  predictions: true
+output:
+  root: artifacts/runs
+integrations:
+  wandb:
+    enabled: false
+  hf_checkpoints:
+    enabled: false

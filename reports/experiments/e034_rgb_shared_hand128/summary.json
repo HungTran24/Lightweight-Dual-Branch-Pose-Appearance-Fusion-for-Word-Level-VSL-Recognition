@@ -1,0 +1,53 @@
+{
+  "experiment_id": "e034_rgb_shared_hand128",
+  "status": "complete",
+  "model": {
+    "name": "rgb_shared_hand128",
+    "input": [2, 576],
+    "projection": "Linear(576,128)+LayerNorm(128)+GELU+Dropout(0.3)",
+    "classifier": "Linear(256,400)",
+    "parameters": 176912
+  },
+  "validation": {
+    "manifest": "manifests/audit/val_clean.csv",
+    "seeds": [42, 43, 44],
+    "metric_convention": "mean_sample_sd",
+    "u24": {
+      "top1": {"mean": 0.5523922443389893, "sample_sd": 0.00674525470887421},
+      "top5": {"mean": 0.7684196631113688, "sample_sd": 0.007251644483238839},
+      "macro_f1": {"mean": 0.5686460336049398, "sample_sd": 0.009190182626178265}
+    },
+    "u30": {
+      "top1": {"mean": 0.5574008226394653, "sample_sd": 0.003980414413148132},
+      "top5": {"mean": 0.7656517624855042, "sample_sd": 0.007751834925411029},
+      "macro_f1": {"mean": 0.5735152761141459, "sample_sd": 0.0045404527920498835}
+    }
+  },
+  "frozen_test": {
+    "manifest": "manifests/vsl400_front_400gloss/test.csv",
+    "videos": 2508,
+    "beta": 0.5,
+    "epsilon": 1e-12,
+    "u24": {
+      "rgb_top1": {"mean": 0.7359117468198141, "sample_sd": 0.005878076581423894},
+      "rgb_top5": {"mean": 0.9387294054031372, "sample_sd": 0.001509560009481604},
+      "rgb_macro_f1": {"mean": 0.7333014806111654, "sample_sd": 0.007312464961950331},
+      "fused_top1": {"mean": 0.9331472714742025, "sample_sd": 0.004806803618284387},
+      "fused_top5": {"mean": 0.9957469503084818, "sample_sd": 0.0006090759191974071},
+      "fused_macro_f1": {"mean": 0.9329527815183004, "sample_sd": 0.0049394915764376145}
+    },
+    "u30": {
+      "rgb_top1": {"mean": 0.7424242496490479, "sample_sd": 0.004598311227612116},
+      "rgb_top5": {"mean": 0.9449760715166727, "sample_sd": 0.0006906296344021916},
+      "rgb_macro_f1": {"mean": 0.7403475046157837, "sample_sd": 0.005925920805239264},
+      "fused_top1": {"mean": 0.9395268360773722, "sample_sd": 0.004373861504435625},
+      "fused_top5": {"mean": 0.9960127671559652, "sample_sd": 0.0006905952216444857},
+      "fused_macro_f1": {"mean": 0.9398452242215475, "sample_sd": 0.005221810115334931}
+    }
+  },
+  "provenance": {
+    "rgb_receipt_sha256": "b095aacfe2f21b220ae2932cc74f34e1d7e2bf05a025cf59c228ffcec4ebbab0",
+    "extraction_identity": "50ad09795226a00a088797840c2b53452bbfb04638d91e257969bfaa6c0558be",
+    "test_receipt_sha256": "ecf89b3c98c37971a04363a29ed19a043cdec31c750bf3c329d1976b1b2589e1"
+  }
+}

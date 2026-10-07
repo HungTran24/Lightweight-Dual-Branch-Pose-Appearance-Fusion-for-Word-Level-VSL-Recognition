@@ -1,0 +1,27 @@
+experiment:
+  id: test_e022_bilstm_pose53_uniform24
+  operation: test_evaluate
+  mode: full
+  seed: 43
+data:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform24-fbbaf7a173a950b2
+  num_classes: 400
+feature:
+  view: pose53
+model:
+  name: bilstm
+  input_channels: 2
+  hidden_size: 128
+checkpoint:
+  source_experiment: e022_bilstm_pose53_uniform24
+  repo_id: hungchill24/vsl400-kp-selection-models
+  revision: 16029e5d3afd033b5fd75ed4ed105469858d4f93
+  path: runs/e022_bilstm_pose53_uniform24_s43/best.pt
+evaluation:
+  split: test
+  batch_size: 32
+  predictions: true
+output:
+  root: artifacts/test_evaluate

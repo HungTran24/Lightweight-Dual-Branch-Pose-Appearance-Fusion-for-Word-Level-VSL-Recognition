@@ -1,0 +1,15 @@
+experiment:
+  id: e032_rgb_pose_scores_test
+  operation: test_matrix
+  mode: full
+  seed: 42
+matrix:
+  configs:
+  - configs/experiments/test/test_e016_tcn_pose53_uniform24_s42.yaml
+  - configs/experiments/test/test_e016_tcn_pose53_uniform24_s43.yaml
+  - configs/experiments/test/test_e016_tcn_pose53_uniform24_s44.yaml
+  - configs/experiments/test/test_e008_tcn_pose53_uniform30_s42.yaml
+  - configs/experiments/test/test_e008_tcn_pose53_uniform30_s43.yaml
+  - configs/experiments/test/test_e008_tcn_pose53_uniform30_s44.yaml
+output:
+  root: artifacts/test_evaluate/e032_rgb_pose_scores_test

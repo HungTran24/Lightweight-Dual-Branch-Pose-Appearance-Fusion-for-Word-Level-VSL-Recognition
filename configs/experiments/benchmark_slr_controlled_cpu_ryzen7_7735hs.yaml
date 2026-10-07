@@ -1,0 +1,57 @@
+experiment:
+  id: benchmark_slr_controlled_cpu_ryzen7_7735hs
+  operation: classifier_benchmark
+  mode: full
+hardware:
+  kind: cpu
+  cpu_contains: AMD Ryzen 7 7735HS
+  cpu_threads: 8
+  interop_threads: 1
+protocol:
+  precision: float32
+  inputs_on_cpu: true
+  warmup_iterations: 50
+  batch1_iterations: 200
+  batch32_iterations: 100
+entries:
+  - name: tcn_pose53_u30_seed42
+    frames: 30
+    nodes: 53
+    checkpoint: artifacts/checkpoints/e008_tcn_pose53_uniform30_s42_best.pt
+    model:
+      name: tcn
+      input_channels: 2
+      channels: [256, 256, 256]
+      dilations: [1, 2, 4]
+      kernel_size: 5
+      dropout: 0.32322641377886574
+  - name: stgcn_pose53_u30_seed42
+    frames: 30
+    nodes: 53
+    checkpoint: artifacts/checkpoints/e013_stgcn_pose53_uniform30_s42_best.pt
+    model:
+      name: stgcn
+      input_channels: 2
+      temporal_kernel: 9
+      dropout: 0.5
+  - name: spoter_pose54_u30_seed42
+    frames: 30
+    nodes: 54
+    checkpoint: artifacts/runs/e034_spoter_pose54_controlled_u30_s42/best.pt
+    model:
+      name: spoter_pose54_controlled
+      input_channels: 2
+      dropout: 0.1
+      max_frames: 30
+  - name: slgcn_bone_pose27_u30_epoch10
+    frames: 30
+    nodes: 27
+    checkpoint: artifacts/checkpoints/e035_slgcn_bone_pose27_controlled_u30_s42_epoch10_best.pt
+    model:
+      name: slgcn_bone_controlled
+      input_channels: 2
+      groups: 16
+      block_size: 41
+      keep_rate: 0.9
+output:
+  root: artifacts/benchmarks/slr_controlled_cpu_ryzen7_7735hs

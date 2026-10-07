@@ -1,0 +1,31 @@
+experiment:
+  id: e035_rgb_shared_hand128_temporal3_frozen_test
+  operation: rgb_test_evaluate
+  mode: full
+manifests:
+  test: manifests/vsl400_front_400gloss/test.csv
+batch_size: 256
+fusion:
+  beta: 0.5
+  epsilon: 1.0e-12
+output:
+  root: artifacts/test_evaluate/e035_rgb_shared_hand128_temporal3_frozen
+branches:
+  - name: shared_hand128_temporal3_u30
+    kind: temporal3
+    model:
+      name: rgb_shared_hand128_temporal3
+    rgb_data:
+      root: artifacts/rgb/e028_rgb_temporal3_test/data
+      receipt: artifacts/rgb/e028_rgb_temporal3_test/receipt.json
+      receipt_sha256: 247bee88b4785f4f17a5b946794fb34fc26dc6b6c97a8ef576fc349a28d67350
+      extraction_identity: 7cda59483fb8f9e8ab86a5788171d12bca38d40826b59e5342f6453f5b1787e1
+    checkpoints:
+      "42": artifacts/runs/e035_rgb_shared_hand128_temporal3_s42/best.pt
+      "43": artifacts/runs/e035_rgb_shared_hand128_temporal3_s43/best.pt
+      "44": artifacts/runs/e035_rgb_shared_hand128_temporal3_s44/best.pt
+    pose_scores:
+      "42": artifacts/test_evaluate/test_e008_tcn_pose53_uniform30_s42/scores.npz
+      "43": artifacts/test_evaluate/test_e008_tcn_pose53_uniform30_s43/scores.npz
+      "44": artifacts/test_evaluate/test_e008_tcn_pose53_uniform30_s44/scores.npz
+    pre_specified_test_extension: true

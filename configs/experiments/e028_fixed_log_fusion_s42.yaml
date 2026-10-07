@@ -1,0 +1,13 @@
+experiment:
+  id: e028_fixed_log_fusion_s42
+  operation: e028_fixed_fusion
+  mode: full
+  seed: 42
+candidate_scores: artifacts/runs/e028_rgb_temporal3_s42/scores.npz
+baseline_rgb_scores: artifacts/runs/e026_rgb_linear_u30_s42/scores.npz
+pose_scores: artifacts/runs/e026_fusion_u30_s42/pose_scores.npz
+fusion:
+  beta: 0.5
+  epsilon: 1.0e-12
+output:
+  root: reports/experiments/e028_rgb_temporal3/seed42

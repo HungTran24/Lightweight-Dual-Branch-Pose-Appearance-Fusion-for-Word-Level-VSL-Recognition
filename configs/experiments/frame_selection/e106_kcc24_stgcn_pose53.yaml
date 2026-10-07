@@ -1,0 +1,34 @@
+experiment:
+  id: e106_kcc24_stgcn_pose53
+  mode: full
+  seed: 42
+
+data:
+  split_path: artifacts/frame_selection_splits/kcc_24_pose53
+  num_classes: 400
+
+feature:
+  view: pose53
+
+model:
+  name: stgcn
+  input_channels: 2
+  temporal_kernel: 9
+  dropout: 0.5
+
+train:
+  epochs: 100
+  patience: 15
+  min_epochs: 10
+  batch_size: 32
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0005
+  grad_clip_norm: 1.0
+
+evaluation:
+  validation: true
+  predictions: true
+
+output:
+  root: artifacts/runs

@@ -1,0 +1,13 @@
+experiment:
+  id: e026_fusion_u30_three_seed_summary
+  operation: e026_fusion_summary
+  mode: full
+fusion_runs:
+  - seed: 42
+    root: artifacts/runs/e026_fusion_u30_s42
+  - seed: 43
+    root: artifacts/runs/e026_fusion_u30_s43
+  - seed: 44
+    root: artifacts/runs/e026_fusion_u30_s44
+output:
+  root: reports/experiments/e026_hand_rgb_late_fusion/three_seed

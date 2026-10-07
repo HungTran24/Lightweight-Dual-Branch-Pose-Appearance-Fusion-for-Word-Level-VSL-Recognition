@@ -1,0 +1,22 @@
+experiment:
+  id: benchmark_bilstm_u60_a100
+  operation: classifier_benchmark
+  mode: full
+hardware:
+  gpu_contains: A100
+protocol:
+  precision: float32
+  inputs_on_gpu: true
+  warmup_iterations: 50
+  batch1_iterations: 200
+  batch32_iterations: 100
+entries:
+  - name: bilstm_u60
+    frames: 60
+    checkpoint: artifacts/runs/e032_bilstm_pose53_uniform60_s42/best.pt
+    model:
+      name: bilstm
+      input_channels: 2
+      hidden_size: 128
+output:
+  root: artifacts/benchmarks/bilstm_u60_a100
