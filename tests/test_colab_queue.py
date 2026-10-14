@@ -135,7 +135,7 @@ def test_colab_queue_build_command_and_resume(tmp_path: Path) -> None:
         session_prefix="queue1-",
         gpu="A100",
         timeout=3600,
-        colab_command="colab-acc2",
+        colab_command="colab-alt",
         python_executable="python3",
     )
     assert cmd == [
@@ -149,7 +149,7 @@ def test_colab_queue_build_command_and_resume(tmp_path: Path) -> None:
         "--timeout",
         "3600",
         "--colab-command",
-        "colab-acc2",
+        "colab-alt",
     ]
 
     # When last.pt exists, --resume is added
@@ -163,7 +163,7 @@ def test_colab_queue_build_command_and_resume(tmp_path: Path) -> None:
         session_prefix="queue1-",
         gpu="A100",
         timeout=3600,
-        colab_command="colab-acc2",
+        colab_command="colab-alt",
         python_executable="python3",
     )
     assert cmd_resumed[-1] == "--resume"

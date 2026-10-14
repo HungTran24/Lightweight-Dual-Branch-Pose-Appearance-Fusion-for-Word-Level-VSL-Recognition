@@ -19,7 +19,7 @@ def main() -> None:
     parser.add_argument("--identity", type=Path, default=Path("~/.ssh/id_ed25519_colab_cli"))
     parser.add_argument("--timeout", type=int, default=21600)
     parser.add_argument("--resume", action="store_true")
-    parser.add_argument("--colab-command", choices=("colab", "colab-acc2"), default="colab")
+    parser.add_argument("--colab-command", default="colab")
     args = parser.parse_args()
 
     session = args.session or f"project-ai-{args.config.stem.replace('_', '-')}"

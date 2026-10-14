@@ -95,7 +95,6 @@ def main(argv: Sequence[str] | None = None) -> None:
     )
     parser.add_argument(
         "--colab-command",
-        choices=("colab", "colab-acc2"),
         default="colab",
         help="Colab CLI binary",
     )
