@@ -1,10 +1,3 @@
----
-title: Canonical VSL400 manifest
-description: Báo cáo materialize fixed canonical signer mapping cho toàn bộ 400 gloss VSL400 front_view
-status: ready
-update_at: 28-08-26
----
-
 # Canonical VSL400 manifest
 
 ## Contract

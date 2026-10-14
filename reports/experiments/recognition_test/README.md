@@ -48,7 +48,7 @@ All values are three-seed mean ± sample SD.
 - Global RGB feature receipt: `artifacts/rgb/e026_rgb_union_test/receipt.json`.
 - Temporal3 feature receipt: `artifacts/rgb/e028_rgb_temporal3_test/receipt.json`, receipt SHA-256 `247bee88b4785f4f17a5b946794fb34fc26dc6b6c97a8ef576fc349a28d67350`.
 
-The U24 fusion is a pre-specified test extension because β=0.5 was selected on U30 validation. It is reported without using its test result for further tuning. `test_summary.csv` is the durable committed ledger; paths under `artifacts/` are local generated evidence and are not tracked by Git.
+The U24 fusion is a pre-specified test extension because β=0.5 was selected on U30 validation. It is reported without using its test result for further tuning. `test_summary.csv` is the summary table; paths under `artifacts/` are local generated evidence and are not tracked by Git.
 
 ## Uniform-16 addendum (2026-10-14)
 

@@ -35,4 +35,4 @@ These are classifier-only complexity estimates. They exclude video decoding, pos
 - Increasing TCN from U24 through U60 has little effect on median latency or throughput in this protocol. ST-GCN U60 approximately halves batch-32 throughput and increases peak VRAM by about 1.84× relative to U30.
 - These measurements support relative classifier-efficiency claims on A100 only. They exclude feature extraction, video decoding, CPU transfer and metric computation, so they are not end-to-end latency or mobile/edge measurements.
 
-Durable committed ledger: `benchmark_summary.csv`. Local machine-readable sources: `artifacts/benchmarks/pose_classifiers_u24_u30_u60_a100/summary.json` and `artifacts/benchmarks/bilstm_u60_a100/summary.json`; `artifacts/` is not tracked by Git.
+Summary: `benchmark_summary.csv`. Local machine-readable sources: `artifacts/benchmarks/pose_classifiers_u24_u30_u60_a100/summary.json` and `artifacts/benchmarks/bilstm_u60_a100/summary.json`; `artifacts/` is not tracked by Git.

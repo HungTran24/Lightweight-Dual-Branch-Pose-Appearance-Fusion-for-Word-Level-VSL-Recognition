@@ -282,7 +282,7 @@ def main() -> None:
 
     pairs.sort(key=lambda x: (x["total_confusion"], x["total_rate"]), reverse=True)
 
-    # Save ONLY Top 10 confusion pairs CSV as requested
+    # Save the top 10 confusion pairs only
     top10_pairs = pairs[:10]
     top_pairs_path = output_dir / "top_confusion_pairs.csv"
     with top_pairs_path.open("w", newline="", encoding="utf-8") as f:
@@ -417,7 +417,7 @@ def main() -> None:
 
     top10_table = []
     top10_table.append(
-        "| Rank | Cặp Gloss | A → B | B → A | Tổng s42 | Tỷ lệ s42 | TCN s43 | TCN s44 | ST-GCN s42 |"
+        "| Rank | Gloss pair | A → B | B → A | Total s42 | Rate s42 | TCN s43 | TCN s44 | ST-GCN s42 |"
     )
     top10_table.append("|---|---|---:|---:|---:|---:|---:|---:|---:|")
     for idx, p in enumerate(top10_pairs, 1):
@@ -436,10 +436,10 @@ def main() -> None:
 
 - **Model & Checkpoint:** TCN Pose53 Uniform-30 E008 seed 42 (`best.pt`, epoch 55).
 - **Data Revision:** `5a0042e1daec2813f74f08fa955276c777e2b40a` (`yolo-e005-pose59-uniform30-a65d7d605573ea13`).
-- **Validation Dataset:** `manifests/audit/val_clean.csv` (2,529 mẫu, 400 classes).
-- **QC Exclusions:** 0 mẫu (Toàn bộ 2,529 mẫu val_clean đều hợp lệ; DROP `024029` và corrupt `019442` thuộc train).
+- **Validation Dataset:** `manifests/audit/val_clean.csv` (2,529 samples, 400 classes).
+- **QC Exclusions:** 0 samples (all 2,529 val_clean samples are valid; the dropped `024029` and the corrupt `019442` belong to train).
 - **Validation Top-1:** 83.27% (2,106/2,529) | **Validation Top-5:** 95.65% (2,419/2,529).
-- **Tổng lỗi Top-1:** 423 mẫu (Audit status trong lỗi: {audit_error_counts["REMAP"]} REMAP, {audit_error_counts["KEEP"]} KEEP, {audit_error_counts["blank"]} unflagged).
+- **Top-1 errors:** 423 samples (audit status among errors: {audit_error_counts["REMAP"]} REMAP, {audit_error_counts["KEEP"]} KEEP, {audit_error_counts["blank"]} unflagged).
 
 ---
 
@@ -447,39 +447,39 @@ def main() -> None:
 
 {top10_md}
 
-*Ghi chú:* Số liệu s43, s44 và ST-GCN s42 được tra cứu độc lập từ predictions tương ứng để tham khảo tính bền vững, không cộng gộp mẫu.
+*Note:* TCN s43, s44 and ST-GCN s42 counts are looked up independently from their own predictions as a robustness reference; samples are not pooled.
 
 ---
 
-## 2. Tỷ lệ Top-1 Wrong nhưng Ground Truth trong Top-5
+## 2. Top-1 Errors with the Ground Truth in Top-5
 
-- **Numerator:** {rescue_numerator} mẫu
-- **Denominator:** {rescue_denominator} mẫu
+- **Numerator:** {rescue_numerator} samples
+- **Denominator:** {rescue_denominator} samples
 - **Top-5 Rescue Rate (Shortlist Retention):** **{rescue_rate * 100:.2f}%** ({rescue_numerator}/{rescue_denominator})
-- Chỉ phản ánh khả năng giữ nhãn thật trong shortlist Top-5 dự đoán; không kết luận mô hình đã nắm bắt đúng nhóm cử chỉ khi chưa có visual audit.
+- This only measures whether the true label stays in the Top-5 shortlist; it does not show that the model has learned a gesture group.
 
 ---
 
-## 3. Evidence ban đầu về Handshape / Hand Orientation
+## 3. Initial Evidence on Handshape / Hand Orientation
 
-- **Observation:** Các top confusion pairs lặp lại một cách bền vững trên các seed khác nhau (s43, s44) và model khác nhau (ST-GCN s42).
-- **Qualitative material:** Năm cặp lặp lại nhiều nhất đã được materialize thành năm video so sánh full-frame có nhãn `GT`, `Pred`, signer và video ID tại `artifacts/error_analysis/confusion_pair_raw_videos/labeled_pairs/`. Mỗi video chứa một lỗi theo từng chiều của cặp.
-- **Hypothesis (chưa xác minh):** Bổ sung RGB hand appearance/orientation có thể cung cấp thêm thông tin về hình thái ngón tay và hướng lòng bàn tay.
-- **Status:** *ambiguous / cannot conclude*. Video hỗ trợ visual audit nhưng chưa có expert annotation, nên không kết luận handshape, trajectory hoặc signer 028 ký sai.
-
----
-
-## 4. Evidence về Pose / Keypoint Quality
-
-- **Observed Signal:** Trên 29 representative samples của top-10 pairs, hand_valid min đạt 96.7%, mean 99.83%; score mean đạt 0.998.
-- **Phạm vi kết luận:** Tín hiệu mask và score chỉ là coarse detection availability, không kiểm tra localization accuracy, finger geometry hay palm orientation. Kết luận duy nhất là không thấy complete missing-hand trong set đó; không được suy ra nguyên nhân lỗi là do 2D insufficiency.
+- **Observation:** The top confusion pairs recur across seeds (s43, s44) and models (ST-GCN s42).
+- **Qualitative material:** The five most recurrent pairs are rendered as five full-frame comparison videos labeled with `GT`, `Pred`, signer and video ID at `artifacts/error_analysis/confusion_pair_raw_videos/labeled_pairs/`. Each video contains one error in each direction of the pair.
+- **Hypothesis (unverified):** RGB hand appearance/orientation may add information about finger configuration and palm orientation.
+- **Status:** *ambiguous / cannot conclude*. The videos support visual inspection but have no expert annotation, so they do not establish handshape, trajectory or signer-028 signing errors.
 
 ---
 
-## 5. Kết luận
+## 4. Evidence on Pose / Keypoint Quality
 
-- Đã xác định được top 10 cặp nhầm lẫn đối xứng và tỷ lệ Top-5 shortlist retention {rescue_rate * 100:.2f}% trên tập validation sạch 2,529 mẫu.
-- Đã tạo visual audit cho năm cặp lặp lại nhiều nhất, nhưng chưa đủ bằng chứng để quy nguyên nhân cho signer, hình học pose hoặc khẳng định RGB hand appearance sẽ cải thiện độ chính xác.
+- **Observed Signal:** Over 29 representative samples of the top-10 pairs, minimum hand_valid is 96.7%, mean 99.83%; mean score is 0.998.
+- **Scope:** Mask and score only reflect coarse detection availability, not localization accuracy, finger geometry or palm orientation. The only conclusion is that no completely missing hand occurs in that set; the errors cannot be attributed to 2D insufficiency.
+
+---
+
+## 5. Conclusion
+
+- The top 10 symmetric confusion pairs and a Top-5 shortlist retention of {rescue_rate * 100:.2f}% are identified on the 2,529-sample clean validation set.
+- Visual material exists for the five most recurrent pairs, but the evidence is insufficient to attribute errors to signer or pose geometry, or to claim that RGB hand appearance will improve accuracy.
 """
     summary_path.write_text(summary_text.strip() + "\n", encoding="utf-8")
     print(f"Saved summary to {summary_path}")

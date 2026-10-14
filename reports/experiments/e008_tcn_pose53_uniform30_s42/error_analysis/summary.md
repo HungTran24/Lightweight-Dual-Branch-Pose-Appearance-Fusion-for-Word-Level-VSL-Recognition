@@ -24,7 +24,7 @@ The five most recurrent unordered confusion pairs across TCN seeds 42/43/44 and 
 | Bánh chưng ↔ Bánh tét | 19 |
 | Xôi ↔ Ướt | 17 |
 
-Full-frame qualitative videos for these five pairs are stored locally at `artifacts/error_analysis/confusion_pair_raw_videos/labeled_pairs/`. Each video shows both confusion directions and labels `GT`, `Pred`, signer and video ID. The ten original MP4 files remain unchanged in the parent directories. Videos are ignored by Git and are not part of this report commit.
+Full-frame qualitative videos for these five pairs are stored locally at `artifacts/error_analysis/confusion_pair_raw_videos/labeled_pairs/`. Each video shows both confusion directions and labels `GT`, `Pred`, signer and video ID. The ten original MP4 files remain unchanged in the parent directories. The videos are not distributed.
 
 ## Signer 028 diagnostic
 

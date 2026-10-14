@@ -54,10 +54,3 @@ This supports an association between signer/cohort and residual domain shift. It
 In the E036 RTMW TCN validation, all 9 clean `Sớm` examples are Top-1 errors for every seed. The `Sớm → Giàu` counts are 10, 9, and 8 for seeds 42, 43, and 44; the reverse `Giàu → Sớm` counts are 1, 3, and 2. RGB also contains this class-level confusion: `Sớm → Giàu` occurs 7 times in each RGB branch across the three seeds, while RGB Temporal3 has 3 reverse-direction events. However, for signer `028` specifically, neither RGB branch produces the `Sớm ↔ Giàu` pair. Its only two clean `Sớm` examples, `024445` and `024545`, are wrong for all three RGB seeds with diffuse predictions. TCN predicts those two as `Giàu` and `Bảo vệ`, respectively, for every seed.
 
 This should be described as a recurring minimal-pair and signer/class interaction. It is not evidence that the `Sớm` labels are wrong. Raw-video or expert re-audit was not performed in E036.
-
-## Completion and exclusions
-
-- [x] RGB score-only per-signer Top-1, Top-5, Macro-F1, sample counts, and three-seed sample SD.
-- [x] Locked clean-label RTMW partition with exact counts and overlap checks.
-- [x] Full TCN runs for seeds 42, 43, and 44, plus durable per-seed and aggregate reports.
-- [x] No recognition test split, raw video, RTMW extraction, Colab, W&B, HF upload, or secret inspection.

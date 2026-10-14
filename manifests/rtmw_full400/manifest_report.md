@@ -1,10 +1,3 @@
----
-title: RTMW extraction manifest report
-description: Deterministic RTMW extraction manifest inventory and sharding summary for smoke and full runs
-status: ready
-update_at: 29-08-26
----
-
 # RTMW extraction manifest report
 
 ## Contract
