@@ -1,4 +1,4 @@
-# Compact Pose and Hand-Appearance Fusion for Vietnamese Sign Language Recognition
+# A Lightweight Dual-Branch Pose–Appearance Fusion Framework for Word-Level Vietnamese Sign Language Recognition
 
 Research code, experiment configurations and aggregate results for word-level
 recognition on VSL400. The pipeline uses a shared dual-head YOLO26m front-end,
