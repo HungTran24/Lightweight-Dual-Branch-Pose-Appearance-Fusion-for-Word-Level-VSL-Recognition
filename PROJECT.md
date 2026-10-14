@@ -1,84 +1,97 @@
-# Chạy Project AI
+# Reproducing the experiments
 
-Chạy các lệnh dưới đây tại thư mục gốc project.
+Run all commands from the repository root.
 
-## 1. Cài môi trường
+## 1. Environment
 
 ```bash
 uv sync --locked --extra ml
-cp .env.example .env
-```
-
-Điền `HF_TOKEN` và `WANDB_API_KEY` trong `.env` theo các integration đang bật trong YAML. HF token cần quyền truy cập dataset và model repo của experiment; nếu experiment upload checkpoint, token cần quyền ghi.
-
-## 2. Chạy local
-
-```bash
-CONFIG=configs/experiments/e008_tcn_pose53_uniform30_s42.yaml
-uv run --extra ml python scripts/run.py "$CONFIG"
-```
-
-Config trên huấn luyện TCN Pose53 Uniform-30, seed 42. Runner tải feature từ HF theo revision/path trong YAML khi chưa có cache; không cần trích xuất lại YOLO hoặc RTMW.
-
-Tiếp tục run đã có checkpoint:
-
-```bash
-uv run --extra ml python scripts/run.py "$CONFIG" --resume
-```
-
-Xem tùy chọn:
-
-```bash
+uv lock --check
+uv run --extra ml pytest -q tests
 uv run --extra ml python scripts/run.py --help
 ```
 
-## 3. Chạy Colab
+ONNX export needs `uv sync --locked --extra ml --group export`. RTMW needs a
+separate OpenMMLab environment (Python 3.10, PyTorch 2.0.1, mmcv 2.0.1,
+mmdet 3.2.0, mmpose 1.3.1, ultralytics 8.4.146); its setup sequence is in
+`src/runtime/colab.py::remote_run_command`.
 
-Cần CLI `colab` hoặc `colab-acc2`, quyền tạo session và SSH identity. Identity mặc định là `~/.ssh/id_ed25519_colab_cli`.
+## 2. Inputs
 
-```bash
-CONFIG=configs/experiments/e008_tcn_pose53_uniform30_s42.yaml
-uv run --extra ml python scripts/colab_run.py "$CONFIG" --gpu A100
-```
+VSL400 must be obtained from the dataset administrator. Configs pin every input
+by repository, revision and path. Pose classifiers read NPZ feature splits;
+extraction, RGB, fusion and diagnostics also need the manifests below at the
+configured paths (ignored by Git):
 
-Tiếp tục run:
-
-```bash
-uv run --extra ml python scripts/colab_run.py "$CONFIG" --gpu A100 --resume
-```
-
-Dùng `scripts/colab_run.py` cho mọi run Colab. Launcher cài môi trường remote, sync source, chạy cùng runner và lấy output về.
-
-## 4. Chuẩn bị đầu vào theo tác vụ
-
-| Tác vụ | Đầu vào cần có |
+| Path | Samples |
 |---|---|
-| Train pose classifier | Feature HF theo `data.repo_id`, `data.revision`, `data.artifact_path`; runner tự tải |
-| Train RGB | Feature local tại `rgb_data.root` và receipt theo YAML |
-| Fusion/test | Checkpoint, feature và prediction của các nhánh theo YAML |
-| Benchmark classifier | Checkpoint local tại từng `entries[].checkpoint`; phần cứng khớp `hardware` |
-| Benchmark front-end | Dataset/checkpoint theo YAML và runtime cho các backend đã chọn |
+| `manifests/audit/train_clean.csv` | 19,715 rows, 19,714 usable videos |
+| `manifests/audit/val_clean.csv` | 2,529 |
+| `manifests/vsl400_front_400gloss/test.csv` | 2,508 |
 
-Khôi phục đúng file và đường dẫn trước khi chạy các tác vụ cần đầu vào local. Dùng revision đã khóa trong YAML.
+Reference SHA-256 of the manifests used for the reported results:
 
-ONNX export/runtime cần nhóm dependency riêng:
-
-```bash
-uv sync --locked --extra ml --group export
+```text
+train_clean.csv  42b54dc9756f832ef8f34a59b27808d30c9e5f9bc3b88ad92d1ebeb9ef5ad7cf
+val_clean.csv    1bd92e5de767b60a1ba86dd907c6db3c54c37252884b98638a8f19e33a4a73f1
+test.csv         9569a1c87a0686d3aed8bd8e514285b827997dfbb8d6483e769812625c2cc89d
 ```
 
-Nhánh RTMW cần OpenMMLab; MediaPipe cần runtime MediaPipe. Launcher Colab đã có môi trường riêng cho `frontend_benchmark` trong `src/runtime/colab.py`.
+See `manifests/audit/README.md` for the label-correction protocol. To use your
+own feature splits, set `data.split_path` in a copied config to an absolute
+directory containing `train.npz`, `val.npz` and `test.npz`; the NPZ contract is
+validated in `src/data.py`.
 
-## 5. Dữ liệu và output
+Configs keep the original W&B and Hugging Face upload settings for provenance.
+Set `integrations.*.enabled: false` in a copied config to run without them.
+Credentials, if needed, go in `.env` (see `.env.example`).
 
-- Train/validation recognition dùng `manifests/audit/train_clean.csv` và `manifests/audit/val_clean.csv`.
-- Test dùng `manifests/vsl400_front_400gloss/test.csv`.
-- Đọc YAML trước khi chạy: experiment, seed, revision, feature view, số frame, model, phần cứng và output.
-- Output ghi theo `output` trong YAML. Dùng `--resume` khi tiếp tục run cũ; giữ nguyên protocol.
-
-## 6. Kiểm tra
+## 3. Training and test evaluation
 
 ```bash
-uv lock --check
-uv run --extra ml pytest -q tests
+for seed in 42 43 44; do
+  uv run --extra ml python scripts/run.py "configs/experiments/e008_tcn_pose53_uniform30_s${seed}.yaml"
+done
 ```
+
+Use `--device cpu` for CPU and `--resume` to continue a run. Output goes to
+`artifacts/runs/<experiment_id>_s<seed>/`. Test configs under
+`configs/experiments/test/` evaluate pinned checkpoints; to evaluate your own,
+set `checkpoint.local_path` in a copied config. Checkpoints are selected on
+validation only.
+
+`scripts/colab_run.py <config> --gpu A100` runs the same runner on Google Colab
+(requires the `colab` CLI and an SSH identity).
+
+## 4. Reported results
+
+Config families are under `configs/experiments/`, reports under
+`reports/experiments/`. All accuracy results use seeds 42/43/44 with sample SD.
+
+| Result | Configs | Evidence |
+|---|---|---|
+| Pose42/53/59 at U30 | `e007`-`e014` | `recognition_validation/` |
+| Pose53 U16 | `e015` TCN, `e017` ST-GCN, `e039` BiLSTM; `test/test_uniform16_matrix.yaml` | `recognition_validation/`, `recognition_test/` |
+| Pose53 U24 | `e016` TCN, `e018` ST-GCN, `e022` BiLSTM | `recognition_validation/`, `recognition_test/` |
+| Pose53 U60 | `e030`-`e032`; `test/test_uniform60_matrix.yaml` | `recognition_validation/`, `recognition_test/` |
+| Global hand appearance and fusion | `e026_rgb_linear_u30_s*`, `e027_weighted_log_prob_fusion`, `test/e026_rgb_frozen_test.yaml` | `e026_hand_rgb_late_fusion/`, `e027_weighted_log_prob_fusion/` |
+| Temporal3 appearance and fusion | `e035_rgb_shared_hand128_temporal3_s*`, `e035_fixed_log_fusion_s*`, `test/e035_rgb_shared_hand128_temporal3_frozen_test.yaml` | `e035_rgb_shared_hand128_temporal3/` |
+| SPOTER / SL-GCN reference models | `e034_spoter_pose54_controlled_*`, `e035_slgcn_bone_pose27_controlled_*` | `e034_e035_slr_controlled_validation/` |
+| Classifier GFLOPs and throughput | `benchmark_pose_classifiers_rtx4060_{gflops,u16,controlled_lengths}.yaml` | `efficiency_benchmark_rtx4060_2026-10-13/` |
+| Front-end latency | `benchmark_frontends_pose_rtx4060.yaml` | `efficiency_benchmark_rtx4060_2026-10-13/` |
+| Validation error analysis | `scripts/error_analysis.py` (E008, seed 42) | `e008_tcn_pose53_uniform30_s42/error_analysis/` |
+
+Each report README lists selection rules, checkpoint identities and rounding.
+
+## 5. Efficiency benchmark
+
+```bash
+uv run --extra ml python scripts/run.py configs/experiments/benchmark_pose_classifiers_rtx4060_gflops.yaml
+```
+
+Classifier protocol: FP32 without TF32, synthetic GPU-resident inputs, 50
+warm-ups, five shuffled rounds; GFLOPs from PyTorch `FlopCounterMode` at batch 1.
+The front-end benchmark runs in the RTMW environment on ten validation videos
+(300 U30 frames) and times preprocessing, inference, NMS and Pose59 selection,
+excluding decoding and classification. Absolute numbers depend on hardware and
+software; the report records both.
