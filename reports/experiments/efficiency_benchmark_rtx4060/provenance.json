@@ -1,0 +1,78 @@
+{
+  "accuracy_evaluated": false,
+  "config_path": "configs/experiments/benchmark_pose_classifiers_rtx4060_controlled_lengths.yaml",
+  "config_sha256": "4b1d651fada540f121f66e47f1162827906d1486c6f7d410f185a6500db2a18b",
+  "driver_version_from_nvidia_smi": "615.71.09",
+  "git_head": "b862e23b3bbce0b56389f50c7d82fb946d873de4",
+  "gpu_snapshot_after": {
+    " clocks.current.graphics [MHz]": " 2475 MHz",
+    " clocks.current.memory [MHz]": " 8001 MHz",
+    " driver_version": " 615.71.09",
+    " memory.used [MiB]": " 40 MiB",
+    " power.draw [W]": " 33.63 W",
+    " pstate": " P0",
+    " temperature.gpu": " 56",
+    " utilization.gpu [%]": " 0 %",
+    "name": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "gpu_snapshot_before": {
+    " clocks.current.graphics [MHz]": " 1890 MHz",
+    " clocks.current.memory [MHz]": " 8001 MHz",
+    " driver_version": " 615.71.09",
+    " memory.used [MiB]": " 40 MiB",
+    " power.draw [W]": " 11.75 W",
+    " pstate": " P0",
+    " temperature.gpu": " 41",
+    " utilization.gpu [%]": " 0 %",
+    "name": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "runner_source_sha256": "810bbebc60f95a72b27c09b2a38340f9a457d8a6a192acc9846aa7c843c1a95f",
+  "status": "verified",
+  "summary_sha256": "d78e8b4ff72e993efdd23118133493428be10d20df6b0a2c2128b2e233342b3a",
+  "u24_u60_comparisons": {
+    "bilstm": {
+      "mean_round_delta_ms": 0.48011521697044374,
+      "sample_sd_round_delta_ms": 0.02041620328527443,
+      "throughput_change_percent": -39.9273186297075,
+      "u60_minus_u24_round_median_ms": [
+        0.4813120365142822,
+        0.4671679735183716,
+        0.46614402532577515,
+        0.5150240063667297,
+        0.47092804312705994
+      ],
+      "u60_slower_rounds": 5,
+      "vram_change_percent": 26.91652720279516
+    },
+    "stgcn": {
+      "mean_round_delta_ms": -0.030025649070739745,
+      "sample_sd_round_delta_ms": 0.5150987810806633,
+      "throughput_change_percent": -65.95305400745059,
+      "u60_minus_u24_round_median_ms": [
+        0.8610401153564453,
+        -0.18672001361846924,
+        -0.16179203987121582,
+        -0.47936010360717773,
+        -0.18329620361328125
+      ],
+      "u60_slower_rounds": 1,
+      "vram_change_percent": 132.52450150261546
+    },
+    "tcn": {
+      "mean_round_delta_ms": -0.0026751995086669923,
+      "sample_sd_round_delta_ms": 0.028832820740340815,
+      "throughput_change_percent": -51.536213411621375,
+      "u60_minus_u24_round_median_ms": [
+        0.04505598545074463,
+        -0.0019359588623046875,
+        -0.008192002773284912,
+        -0.03099203109741211,
+        -0.01731199026107788
+      ],
+      "u60_slower_rounds": 1,
+      "vram_change_percent": 28.59690844233056
+    }
+  },
+  "uncommitted_benchmark_changes": true,
+  "wandb_hf_colab_used": false
+}

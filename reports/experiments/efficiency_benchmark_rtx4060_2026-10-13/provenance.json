@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-13",
+  "git_commit": "ec18cdfd7eda671ea6b44b52b486597fb75ccc84",
+  "git_dirty_note": "src/classifier_benchmark.py (GFLOPs) and src/frontend_benchmark.py (local clips/checkpoint) uncommitted at run time",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU 8 GB",
+    "cpu": "AMD Ryzen 7 7735HS",
+    "power": "AC, powerprofilesctl performance"
+  },
+  "classifier": {
+    "config": "configs/experiments/benchmark_pose_classifiers_rtx4060_gflops.yaml",
+    "command": "uv run python scripts/run.py configs/experiments/benchmark_pose_classifiers_rtx4060_gflops.yaml --device cuda",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "runtime": {
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "source_sha256": "7a5a0dd7420e6dbec3bac03caae52305683f65f96114b6b11c75ee3ff51ed586",
+      "tf32_cudnn": false,
+      "tf32_matmul": false
+    },
+    "protocol": {
+      "allow_tf32": false,
+      "batch1_iterations": 200,
+      "batch32_iterations": 100,
+      "input_source": "synthetic_zero_all_valid",
+      "inputs_on_gpu": true,
+      "order_seed": 42,
+      "precision": "float32",
+      "repeats": 5,
+      "warmup_iterations": 50
+    },
+    "source_sha256": {
+      "src/classifier_benchmark.py": "7a5a0dd7420e6dbec3bac03caae52305683f65f96114b6b11c75ee3ff51ed586"
+    }
+  },
+  "frontend": {
+    "config": "configs/experiments/benchmark_frontends_pose_rtx4060.yaml",
+    "command": "~/.venvs/frontend-rtmw/bin/python scripts/run.py configs/experiments/benchmark_frontends_pose_rtx4060.yaml --device cuda (5 runs)",
+    "environment": {
+      "device": "cuda",
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "packages": {
+        "mmcv": "2.0.1",
+        "mmdet": "3.2.0",
+        "mmengine": "0.9.0",
+        "mmpose": "1.3.1",
+        "ultralytics": "8.4.146"
+      },
+      "torch": "2.0.1+cu118"
+    },
+    "protocol": {
+      "max_detections": 300,
+      "nms_confidence": 0.25,
+      "nms_iou": 0.7,
+      "precision": "float32",
+      "timing_boundary": "preprocess + transfer + inference + postprocess; decode and model load excluded",
+      "warmup_passes": 1
+    },
+    "data": {
+      "manifest": "manifests/audit/val_clean.csv",
+      "manifest_sha256": "1bd92e5de767b60a1ba86dd907c6db3c54c37252884b98638a8f19e33a4a73f1",
+      "selected_frames": 300,
+      "selection_seed": 42,
+      "selected_video_count": 10,
+      "selected_video_records_sha256": "e5c7d614b7037145cf94921c04362d46008a34e7f8a7e54174f63b1dbab908db",
+      "selected_video_records_note": "Per-video records withheld from the public report; deterministic selection is specified in the config."
+    },
+    "yolo_checkpoint": {
+      "path": "artifacts/yolo/e005_yolo_person17_hand21_discriminative_max30/run/best.pt",
+      "sha256": "0ee2a0e349f79550271550274aa4e5e17fa09ab1c8b6de5c141392dbebb4a505"
+    },
+    "source_sha256": {
+      "src/frontend_benchmark.py": "1f8d5254dd75579ab90d59c54c9f5c4072008ded81cf31a01216b64718060685"
+    }
+  }
+}

@@ -16,6 +16,7 @@ This is the small canonical index for completed validation evidence. It links pe
 - E015–E018 Pose53 frame-length rows: `../e008_e018_pose53_frame/comparison.csv` and `.json`.
 - E020 SPOTER negative gate: `../e020_spoter_pose54_uniform30_s42/result.json`.
 - E022 BiLSTM Pose53 Uniform-24: `../../../artifacts/runs/e022_bilstm_pose53_uniform24_s{42,43,44}/summary.json`.
+- E039 BiLSTM Pose53 Uniform-16: `../../../artifacts/runs/e039_bilstm_pose53_uniform16_s{42,43,44}/summary.json`; fills the BiLSTM U16 cell of the frame-budget matrix. Frozen test for this row was not run.
 - E026 RGB and arithmetic fusion: `../e026_hand_rgb_late_fusion/three_seed/summary.json`, `three_seed/README.md`, and `three_seed/mean_alpha_curve.csv`.
 - E027 weighted log-probability fusion: `../e027_weighted_log_prob_fusion/summary.json`, `README.md`, and `beta_curve.csv`.
 - E028 temporal-3 per-seed results: `../e028_rgb_temporal3/seed42/summary.json`, `seed43/summary.json`, and `seed44/summary.json`. The seed-42 gate failure is retained as metadata; seeds 43/44 were authorized continuations.

@@ -1,0 +1,28 @@
+experiment:
+  id: test_e015_tcn_pose53_uniform16
+  operation: test_evaluate
+  mode: full
+  seed: 42
+data:
+  repo_id: hungchill24/vsl400-kp-selection-features
+  revision: 5a0042e1daec2813f74f08fa955276c777e2b40a
+  artifact_path: yolo-e005-pose59-uniform16-cf0e39cbdf368468
+  num_classes: 400
+feature:
+  view: pose53
+model:
+  name: tcn
+  input_channels: 2
+  channels: [256, 256, 256]
+  dilations: [1, 2, 4]
+  kernel_size: 5
+  dropout: 0.32322641377886574
+checkpoint:
+  source_experiment: e015_tcn_pose53_uniform16
+  local_path: artifacts/runs/e015_tcn_pose53_uniform16_s42/best.pt
+evaluation:
+  split: test
+  batch_size: 32
+  predictions: true
+output:
+  root: artifacts/test_evaluate

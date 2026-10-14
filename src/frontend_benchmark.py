@@ -7,7 +7,6 @@ import hashlib
 import importlib
 import importlib.metadata
 import tarfile
-import tempfile
 import time
 from collections.abc import Callable
 from pathlib import Path
@@ -69,20 +68,23 @@ def _decode_frames(
     config: dict[str, Any], project_root: Path
 ) -> tuple[list[np.ndarray], list[dict[str, Any]]]:
     data = config["data"]
-    rows = _selected_rows(data, project_root)
+    rows = sorted(_selected_rows(data, project_root), key=lambda row: int(row["part_id"]))
     frames: list[np.ndarray] = []
     selected: list[dict[str, Any]] = []
-    cache_dir = project_root / "cache" / "frontend_benchmark"
     frames_per_video = int(data["frames_per_video"])
-    with tempfile.TemporaryDirectory(prefix="frontend-benchmark-") as temporary:
-        temporary_dir = Path(temporary)
+    if "video_dir" in data:
+        video_dir = project_root / data["video_dir"]
+    else:
+        # Keep the selected clips next to the output so later runs can skip the multi-GB archives.
+        video_dir = project_root / config["output"]["root"] / "videos"
+        video_dir.mkdir(parents=True, exist_ok=True)
         for part in sorted({int(row["part_id"]) for row in rows}):
             archive = download_file(
                 repo_id=data["dataset_repo"],
                 repo_type="dataset",
                 revision=data["dataset_revision"],
                 filename=f"data/split_{part}_front_view.tar",
-                cache_dir=cache_dir,
+                cache_dir=project_root / "cache" / "frontend_benchmark",
             )
             with tarfile.open(archive, "r:") as contents:
                 for row in (row for row in rows if int(row["part_id"]) == part):
@@ -90,33 +92,37 @@ def _decode_frames(
                     source = contents.extractfile(f"split_{part}/front_view/{video_id}.mp4")
                     if source is None:
                         raise RuntimeError(f"Benchmark video is missing: {video_id}")
-                    video_path = temporary_dir / f"{video_id}.mp4"
-                    video_path.write_bytes(source.read())
-                    capture = cv2.VideoCapture(str(video_path))
-                    video_frames: list[np.ndarray] = []
-                    try:
-                        while True:
-                            ok, frame = capture.read()
-                            if not ok:
-                                break
-                            video_frames.append(frame)
-                    finally:
-                        capture.release()
-                    video_path.unlink()
-                    if len(video_frames) != int(row["num_frames"]):
-                        raise RuntimeError(f"Decoded frame count mismatch for {video_id}")
-                    indices = uniform_indices(len(video_frames), frames_per_video)
-                    if np.any(indices < 0):
-                        raise RuntimeError(f"Benchmark video is shorter than Uniform-{frames_per_video}: {video_id}")
-                    frames.extend(video_frames[index] for index in indices)
-                    selected.append(
-                        {
-                            "video_id": video_id,
-                            "signer_id": row["signer_id"],
-                            "source_frames": len(video_frames),
-                            "uniform_indices": indices.tolist(),
-                        }
-                    )
+                    (video_dir / f"{video_id}.mp4").write_bytes(source.read())
+    for row in rows:
+        video_id = row["video_id"].zfill(6)
+        video_path = video_dir / f"{video_id}.mp4"
+        if not video_path.is_file():
+            raise RuntimeError(f"Benchmark video is missing: {video_path}")
+        capture = cv2.VideoCapture(str(video_path))
+        video_frames: list[np.ndarray] = []
+        try:
+            while True:
+                ok, frame = capture.read()
+                if not ok:
+                    break
+                video_frames.append(frame)
+        finally:
+            capture.release()
+        if len(video_frames) != int(row["num_frames"]):
+            raise RuntimeError(f"Decoded frame count mismatch for {video_id}")
+        indices = uniform_indices(len(video_frames), frames_per_video)
+        if np.any(indices < 0):
+            raise RuntimeError(f"Benchmark video is shorter than Uniform-{frames_per_video}: {video_id}")
+        frames.extend(video_frames[index] for index in indices)
+        selected.append(
+            {
+                "video_id": video_id,
+                "signer_id": row["signer_id"],
+                "source_frames": len(video_frames),
+                "uniform_indices": indices.tolist(),
+                "sha256": sha256(video_path),
+            }
+        )
     if len(frames) != int(data["expected_frames"]):
         raise RuntimeError(f"Expected {data['expected_frames']} selected frames, got {len(frames)}")
     return frames, selected
@@ -210,12 +216,17 @@ def _yolo_backend(
     config: dict[str, Any], project_root: Path, device: torch.device
 ) -> tuple[Callable[[np.ndarray, int], bool], dict[str, Any]]:
     checkpoint_cfg = config["yolo_checkpoint"]
-    checkpoint = download_checkpoint(
-        repo_id=checkpoint_cfg["repo_id"],
-        revision=checkpoint_cfg["revision"],
-        path_in_repo=checkpoint_cfg["path"],
-        cache_dir=project_root / "cache" / "frontend_benchmark",
-    )
+    if "local_path" in checkpoint_cfg:
+        checkpoint = project_root / checkpoint_cfg["local_path"]
+        if sha256(checkpoint) != checkpoint_cfg["sha256"]:
+            raise ValueError(f"YOLO checkpoint SHA-256 mismatch: {checkpoint}")
+    else:
+        checkpoint = download_checkpoint(
+            repo_id=checkpoint_cfg["repo_id"],
+            revision=checkpoint_cfg["revision"],
+            path_in_repo=checkpoint_cfg["path"],
+            cache_dir=project_root / "cache" / "frontend_benchmark",
+        )
     model_config = {"model": config["yolo_model"]}
     model, _, _, _ = initialize_model(model_config, device, checkpoint)
     model.eval()

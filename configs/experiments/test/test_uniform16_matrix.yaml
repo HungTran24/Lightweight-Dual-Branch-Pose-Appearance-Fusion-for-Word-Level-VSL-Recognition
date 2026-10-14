@@ -1,0 +1,18 @@
+experiment:
+  id: test_uniform16_matrix
+  operation: test_matrix
+  mode: full
+  seed: 42
+matrix:
+  configs:
+    - configs/experiments/test/test_e015_tcn_pose53_uniform16_s42.yaml
+    - configs/experiments/test/test_e015_tcn_pose53_uniform16_s43.yaml
+    - configs/experiments/test/test_e015_tcn_pose53_uniform16_s44.yaml
+    - configs/experiments/test/test_e017_stgcn_pose53_uniform16_s42.yaml
+    - configs/experiments/test/test_e017_stgcn_pose53_uniform16_s43.yaml
+    - configs/experiments/test/test_e017_stgcn_pose53_uniform16_s44.yaml
+    - configs/experiments/test/test_e039_bilstm_pose53_uniform16_s42.yaml
+    - configs/experiments/test/test_e039_bilstm_pose53_uniform16_s43.yaml
+    - configs/experiments/test/test_e039_bilstm_pose53_uniform16_s44.yaml
+output:
+  root: artifacts/test_evaluate/test_uniform16_matrix

@@ -1,0 +1,11 @@
+run,frontend,median_ms,p95_ms,throughput_fps,output_presence,peak_vram_mib
+1,rtmdet_nano_rtmw_m,48.584,106.427,17.85,1.0,273.0
+1,e005_dual_head_yolo,21.134,37.75,40.75,1.0,416.0
+2,rtmdet_nano_rtmw_m,46.869,97.474,18.89,1.0,273.0
+2,e005_dual_head_yolo,18.72,22.247,52.21,1.0,416.0
+3,rtmdet_nano_rtmw_m,40.717,57.383,23.07,1.0,273.0
+3,e005_dual_head_yolo,18.552,24.878,51.66,1.0,416.0
+4,rtmdet_nano_rtmw_m,44.541,54.572,21.85,1.0,273.0
+4,e005_dual_head_yolo,18.969,33.678,47.22,1.0,416.0
+5,rtmdet_nano_rtmw_m,42.689,50.243,22.93,1.0,273.0
+5,e005_dual_head_yolo,18.435,20.294,52.99,1.0,416.0

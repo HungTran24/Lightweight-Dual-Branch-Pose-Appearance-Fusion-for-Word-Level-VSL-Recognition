@@ -49,3 +49,11 @@ All values are three-seed mean ± sample SD.
 - Temporal3 feature receipt: `artifacts/rgb/e028_rgb_temporal3_test/receipt.json`, receipt SHA-256 `247bee88b4785f4f17a5b946794fb34fc26dc6b6c97a8ef576fc349a28d67350`.
 
 The U24 fusion is a pre-specified test extension because β=0.5 was selected on U30 validation. It is reported without using its test result for further tuning. `test_summary.csv` is the durable committed ledger; paths under `artifacts/` are local generated evidence and are not tracked by Git.
+
+## Uniform-16 addendum (2026-10-14)
+
+- Evaluated after the frame-budget choice; no selection or tuning uses these results.
+- Features: `hungchill24/vsl400-kp-selection-features@5a0042e1daec2813f74f08fa955276c777e2b40a`, `yolo-e005-pose59-uniform16-cf0e39cbdf368468/data/test.npz` (same pinned revision as U24/U30). Checkpoints: local `artifacts/runs/{e015,e017,e039}_*_uniform16_s{42,43,44}/best.pt`.
+- Config: `configs/experiments/test/test_uniform16_matrix.yaml`; summary `artifacts/test_evaluate/test_uniform16_matrix/summary.json`.
+- Top-1 (mean ± SD): TCN 91.04 ± 0.48%, ST-GCN 89.66 ± 0.56%, BiLSTM 78.35 ± 1.20%. Top-5: 99.19 ± 0.02%, 98.90 ± 0.10%, 96.65 ± 0.07%. Macro-F1: 90.93 ± 0.49%, 89.40 ± 0.54%, 77.64 ± 1.37%.
+- Reproducibility check: re-running `test_e008_tcn_pose53_uniform30_s42.yaml` gives Top-1 0.923445, identical to the original E023 entry.

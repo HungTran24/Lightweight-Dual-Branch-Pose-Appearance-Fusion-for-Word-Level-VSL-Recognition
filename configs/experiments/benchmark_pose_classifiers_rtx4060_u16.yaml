@@ -1,0 +1,81 @@
+experiment:
+  id: benchmark_pose_classifiers_rtx4060_u16
+  operation: classifier_benchmark
+  mode: full
+hardware:
+  gpu_contains: RTX 4060 Laptop GPU
+protocol:
+  precision: float32
+  inputs_on_gpu: true
+  input_source: synthetic_zero_all_valid
+  allow_tf32: false
+  warmup_iterations: 50
+  batch1_iterations: 200
+  batch32_iterations: 100
+  repeats: 5
+  order_seed: 42
+entries:
+  - name: bilstm_u16_s42
+    frames: 16
+    nodes: 53
+    checkpoint: artifacts/runs/e010_bilstm_pose53_uniform30_s42/best.pt
+    checkpoint_sha256: cb0723a84a43b53c8536964469030655aded4a9f1739a5abf083c5e63bc11de7
+    model:
+      name: bilstm
+      input_channels: 2
+      hidden_size: 128
+  - name: bilstm_u30_s42
+    frames: 30
+    nodes: 53
+    checkpoint: artifacts/runs/e010_bilstm_pose53_uniform30_s42/best.pt
+    checkpoint_sha256: cb0723a84a43b53c8536964469030655aded4a9f1739a5abf083c5e63bc11de7
+    model:
+      name: bilstm
+      input_channels: 2
+      hidden_size: 128
+  - name: tcn_u16_s42
+    frames: 16
+    nodes: 53
+    checkpoint: artifacts/runs/e008_tcn_pose53_uniform30_s42/best.pt
+    checkpoint_sha256: e6d899f28324877d7cb230c74976cc31593e05b214afce6e065cc4c857e57f21
+    model:
+      name: tcn
+      input_channels: 2
+      channels: [256, 256, 256]
+      dilations: [1, 2, 4]
+      kernel_size: 5
+      dropout: 0.32322641377886574
+  - name: tcn_u30_s42
+    frames: 30
+    nodes: 53
+    checkpoint: artifacts/runs/e008_tcn_pose53_uniform30_s42/best.pt
+    checkpoint_sha256: e6d899f28324877d7cb230c74976cc31593e05b214afce6e065cc4c857e57f21
+    model:
+      name: tcn
+      input_channels: 2
+      channels: [256, 256, 256]
+      dilations: [1, 2, 4]
+      kernel_size: 5
+      dropout: 0.32322641377886574
+  - name: stgcn_u16_s42
+    frames: 16
+    nodes: 53
+    checkpoint: artifacts/runs/e013_stgcn_pose53_uniform30_s42/best.pt
+    checkpoint_sha256: 25a99efc95034c0d79cc6fa6ec2faf8118f08788e245356de958d3458098cadc
+    model:
+      name: stgcn
+      input_channels: 2
+      temporal_kernel: 9
+      dropout: 0.5
+  - name: stgcn_u30_s42
+    frames: 30
+    nodes: 53
+    checkpoint: artifacts/runs/e013_stgcn_pose53_uniform30_s42/best.pt
+    checkpoint_sha256: 25a99efc95034c0d79cc6fa6ec2faf8118f08788e245356de958d3458098cadc
+    model:
+      name: stgcn
+      input_channels: 2
+      temporal_kernel: 9
+      dropout: 0.5
+output:
+  root: artifacts/benchmarks/pose_classifiers_rtx4060_u16

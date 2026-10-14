@@ -16,3 +16,6 @@ shared_hand128_rgb,30,0.7424242496,0.0045983112,0.9449760715,0.0006906296,0.7403
 pose_shared_hand128_log_fusion,30,0.9395268361,0.0043738615,0.9960127672,0.0006905952,0.9398452242,0.0052218101,0.5,artifacts/test_evaluate/e034_rgb_shared_hand128_frozen/summary.json
 shared_hand128_temporal3_rgb,30,0.7777777712,0.0063337260,0.9524189234,0.0024034035,0.7789057891,0.0048087441,,artifacts/test_evaluate/e035_rgb_shared_hand128_temporal3_frozen/summary.json
 pose_shared_hand128_temporal3_log_fusion,30,0.9391281207,0.0036179125,0.9948166013,0.0007974505,0.9402695696,0.0035823017,0.5,artifacts/test_evaluate/e035_rgb_shared_hand128_temporal3_frozen/summary.json
+pose_tcn,16,0.9104200006,0.0047569168,0.9918925961,0.0002301869,0.9093335867,0.0048581854,,artifacts/test_evaluate/test_uniform16_matrix/summary.json
+pose_stgcn,16,0.8965975444,0.0056011085,0.9889686505,0.0010034208,0.8939926028,0.0053685113,,artifacts/test_evaluate/test_uniform16_matrix/summary.json
+pose_bilstm,16,0.7834928036,0.0119816481,0.9665071766,0.0006906296,0.7764115135,0.0137482482,,artifacts/test_evaluate/test_uniform16_matrix/summary.json

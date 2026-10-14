@@ -186,7 +186,12 @@ def _validate_classifier_benchmark(config: dict[str, Any]) -> None:
     hardware = config.get("hardware")
     protocol = config.get("protocol")
     entries = config.get("entries")
-    if not isinstance(hardware, dict) or not isinstance(protocol, dict) or not isinstance(entries, list) or not entries:
+    if (
+        not isinstance(hardware, dict)
+        or not isinstance(protocol, dict)
+        or not isinstance(entries, list)
+        or not entries
+    ):
         raise ValueError("classifier_benchmark requires hardware, protocol, and entries")
     kind = hardware.get("kind", "cuda")
     if kind == "cuda":
@@ -201,17 +206,49 @@ def _validate_classifier_benchmark(config: dict[str, Any]) -> None:
             or not isinstance(hardware.get("interop_threads"), int)
             or hardware["interop_threads"] <= 0
         ):
-            raise ValueError("CPU classifier_benchmark requires CPU identity and positive thread counts")
+            raise ValueError(
+                "CPU classifier_benchmark requires CPU identity and positive thread counts"
+            )
     else:
         raise ValueError("classifier_benchmark hardware.kind must be cuda or cpu")
     for name in ("warmup_iterations", "batch1_iterations", "batch32_iterations"):
         if not isinstance(protocol.get(name), int) or protocol[name] <= 0:
             raise ValueError(f"classifier_benchmark protocol.{name} must be positive")
+    if "repeats" in protocol and (type(protocol["repeats"]) is not int or protocol["repeats"] <= 0):
+        raise ValueError("classifier_benchmark protocol.repeats must be a positive integer")
+    if "order_seed" in protocol and type(protocol["order_seed"]) is not int:
+        raise ValueError("classifier_benchmark protocol.order_seed must be an integer")
+    if "allow_tf32" in protocol and type(protocol["allow_tf32"]) is not bool:
+        raise ValueError("classifier_benchmark protocol.allow_tf32 must be boolean")
+    if "precision" in protocol and protocol["precision"] != "float32":
+        raise ValueError("classifier_benchmark supports only float32 precision")
+    for name, expected in (("inputs_on_gpu", kind == "cuda"), ("inputs_on_cpu", kind == "cpu")):
+        if name in protocol and (type(protocol[name]) is not bool or protocol[name] != expected):
+            raise ValueError(f"classifier_benchmark protocol.{name} conflicts with hardware.kind")
     for entry in entries:
-        if not isinstance(entry, dict) or not isinstance(entry.get("checkpoint"), str) or not isinstance(
-            entry.get("model"), dict
+        if (
+            not isinstance(entry, dict)
+            or not isinstance(entry.get("checkpoint"), str)
+            or not isinstance(entry.get("model"), dict)
         ):
             raise ValueError("classifier_benchmark entries require checkpoint and model")
+        for name, value in (
+            ("frames", entry.get("frames")),
+            ("nodes", entry.get("nodes", 53)),
+            (
+                "input_channels",
+                entry["model"].get("input_channels", entry.get("input_channels", 2)),
+            ),
+        ):
+            if type(value) is not int or value <= 0:
+                raise ValueError(f"classifier_benchmark entry.{name} must be a positive integer")
+        declared_hash = entry.get("checkpoint_sha256")
+        if declared_hash is not None and (
+            not isinstance(declared_hash, str)
+            or len(declared_hash) != 64
+            or any(character not in "0123456789abcdefABCDEF" for character in declared_hash)
+        ):
+            raise ValueError("classifier_benchmark checkpoint_sha256 must be a SHA-256 hex digest")
 
 
 def _validate_frontend_benchmark(config: dict[str, Any]) -> None:

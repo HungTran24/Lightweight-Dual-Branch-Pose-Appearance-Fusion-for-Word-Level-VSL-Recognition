@@ -1,0 +1,2 @@
+timestamp, clocks.current.sm [MHz], power.draw [W], temperature.gpu, utilization.gpu [%], clocks_event_reasons.active
+2026/10/13 17:12:02.790, 2475 MHz, 18.49 W, 53, 0 %, 0x0000000000000400
