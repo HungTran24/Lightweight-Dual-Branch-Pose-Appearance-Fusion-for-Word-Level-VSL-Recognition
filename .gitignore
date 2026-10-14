@@ -25,9 +25,23 @@ __pycache__/
 *.onnx
 *.npy
 *.npz
+*.mp4
+*.avi
+*.mov
+*.tar
+*.tar.gz
+*.zip
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
 .vscode/
 worktrees/
 writing-paper/books/
+
+# Licensed VSL400 inputs and derived media are not redistributed.
+manifests/**/*.csv
+manifests/**/*.json
+manifests/audit/REDFLAG_CORRECTIONS_SUMMARY.md
+reports/experiments/e026_hand_rgb_late_fusion/visual_audit/
+reports/experiments/e008_tcn_pose53_uniform30_s42/error_analysis/qualitative_video_manifest.csv
+writing-paper/
