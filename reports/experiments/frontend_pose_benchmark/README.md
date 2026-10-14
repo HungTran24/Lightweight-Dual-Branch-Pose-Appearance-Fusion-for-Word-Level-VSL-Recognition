@@ -10,7 +10,7 @@
 - Timing boundary: native-frame preprocessing, host/device transfer where applicable, backend inference and output postprocessing. Video decode, archive download, model construction/checkpoint download, artifact writing and classifier forward are excluded.
 - This is an evaluated frontend/runtime configuration benchmark, not an end-to-end recognition benchmark or an architecture-only ranking.
 
-The selected video IDs are `003570`, `004011`, `004144`, `004206`, `015360`, `015555`, `015676`, `024150`, `024448` and `024641`.
+The ten videos are selected deterministically from the clean validation manifest (seed 42); per-video IDs are not distributed.
 
 ## Runtime results
 
@@ -74,7 +74,7 @@ These are classifier-only complexity figures and do not include video decoding, 
 
 ## Sources
 
-- Durable committed summary: `reports/experiments/frontend_pose_benchmark/summary.json`
+- Summary: `reports/experiments/frontend_pose_benchmark/summary.json`
 - CPU summary: `artifacts/benchmarks/frontend_pose_cpu_ryzen7_7735hs/summary.json`
 - A100 summary: `artifacts/benchmarks/frontend_pose_a100/summary.json`
 - CPU benchmark config: `configs/experiments/benchmark_frontends_pose_cpu_ryzen7_7735hs.yaml`
