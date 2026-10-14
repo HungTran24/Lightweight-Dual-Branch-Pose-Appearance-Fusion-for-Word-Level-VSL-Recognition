@@ -51,6 +51,10 @@ def test_frontend_benchmark_configs_load() -> None:
     )
 
 
+@pytest.mark.skipif(
+    not (PROJECT_ROOT / "manifests/audit/val_clean.csv").is_file(),
+    reason="needs the licensed VSL400 manifest",
+)
 def test_frontend_benchmark_uses_ten_clean_validation_videos() -> None:
     config = load_config(
         PROJECT_ROOT / "configs/experiments/benchmark_frontends_pose_cpu_ryzen7_7735hs.yaml"

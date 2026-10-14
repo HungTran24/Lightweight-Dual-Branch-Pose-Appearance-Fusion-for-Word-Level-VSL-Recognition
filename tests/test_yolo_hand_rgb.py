@@ -599,6 +599,8 @@ def test_config_validation_e005_vs_e021_and_hf_rejection(tmp_path: Path) -> None
     assert smoke_cfg["data"]["cleanup_part_cache"] is True
     assert smoke_cfg["data"]["expected_frames"] == 25668
     train_manifest = repo_root / smoke_cfg["data"]["manifests"]["train"]
+    if not train_manifest.is_file():
+        pytest.skip("needs the licensed VSL400 manifest")
     with train_manifest.open(newline="", encoding="utf-8") as f:
         train_rows = [r for r in csv.DictReader(f) if r["video_id"].zfill(6) != "019442"][:300]
     val_manifest = repo_root / smoke_cfg["data"]["manifests"]["val"]
